@@ -773,6 +773,75 @@ ul {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Mobile Hero Alignment Fixes */
+@media (max-width: 768px) {
+    .hero-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+
+    .hero-text p {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .placement-header {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-subtitle {
+        width: 100%;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .background-options {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .stats-card {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-btn {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-image {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-image .image-placeholder {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
 /* Sections General */
 section {
     padding: 80px 0;
