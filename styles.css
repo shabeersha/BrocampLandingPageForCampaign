@@ -788,7 +788,7 @@ ul {
 
     .hero-text {
         min-width: 0;
-        width: 100%;
+        width: 90%;
         order: 2;
         display: flex;
         flex-direction: column;
@@ -797,15 +797,15 @@ ul {
 
     .hero-text h1 {
         font-size: 1.4rem;
-        text-align: center;
+        text-align: left;
         color: #fff;
         font-weight: 700;
     }
 
     .hero-text p {
         font-size: 0.8rem;
-        max-width: 100%;
-        text-align: center;
+        max-width: 90%;
+        text-align: left;
         display: none;
     }
 
@@ -829,8 +829,8 @@ ul {
     .hero-subtitle {
         font-size: 14px;
         width: 100%;
-        text-align: center;
-        justify-content: center;
+        text-align: left;
+        justify-content: left;
         color: #fff;
         margin-bottom: 15px;
     }
