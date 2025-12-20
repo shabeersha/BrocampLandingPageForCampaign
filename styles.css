@@ -562,7 +562,7 @@ ul {
     }
 
     .form-visual {
-        flex: 0 0 200px;
+        flex: 0 0 160px;
         /* Fixed height for visual on mobile */
         width: 100%;
         border-right: none;
@@ -574,8 +574,8 @@ ul {
     }
 
     .visual-circle {
-        width: 150px;
-        height: 150px;
+        width: 140px;
+        height: 140px;
     }
 
     .visual-content {
@@ -851,7 +851,7 @@ ul {
     }
 
     .hero-text h1 {
-        font-size: 1.4rem;
+        font-size: 1rem;
         font-weight: 700;
         color: #fff;
         text-align: center;
@@ -895,7 +895,7 @@ ul {
 
     /* OPTIONS */
     .background-options {
-        width: 70%;
+        width: 90%;
         display: flex;
         justify-content: center;
         gap: 10px;
@@ -921,7 +921,7 @@ ul {
 
     /* STATS */
     .stats-card {
-        width: 70%;
+        width: 90%;
         margin: 20px auto 0;
         padding: 10px 16px;
         background: rgba(139, 69, 19, 0.3);
@@ -942,13 +942,18 @@ ul {
 
     /* BUTTON */
     .hero-btn {
-        width: 70%;
+        width: 90%;
         height: 48px;
         margin: 20px auto 0;
         font-size: 1rem;
         background: #dc143c;
         border-radius: 8px;
         font-weight: 600;
+    }
+
+    .form-section {
+        padding-top: 0px;
+        /* Reduced to 0px per user request */
     }
 }
 
