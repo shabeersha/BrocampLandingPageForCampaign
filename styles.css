@@ -857,32 +857,25 @@ ul {
         text-align: center;
     }
 
-    .placement-header {
-        width: fit-content;
-        margin: 0 auto 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        /* Ensure it's visible */
-    }
-
+    .placement-header,
     .placement-count,
+    .placement-separator,
     .placement-salary {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        display: none !important;
     }
 
     .placement-number {
         font-size: 14px;
         font-weight: 700;
         color: #FFA500;
+        line-height: 1;
+        margin-bottom: 2px;
     }
 
     .placement-text {
         font-size: 8px;
         color: #ccc;
+        line-height: 1;
     }
 
     .hero-text p {
