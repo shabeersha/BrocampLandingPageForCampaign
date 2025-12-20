@@ -684,6 +684,22 @@ ul {
         height: 300px;
         /* Reduced height for mobile */
     }
+
+    .video-content-text {
+        padding: 0;
+        text-align: left;
+        width: 100%;
+    }
+
+    .video-content-text h2 {
+        text-align: left;
+        font-size: 1.8rem;
+        /* Use a smaller font size for mobile */
+    }
+
+    .video-features {
+        align-items: flex-start;
+    }
 }
 
 .stats-top-row {
@@ -799,7 +815,8 @@ ul {
 @media (max-width: 768px) {
 
     .hero {
-        padding: 100px 0 40px;
+        padding: 150px 0 40px;
+        /* Increased from 100px to avoid navbar overlap */
         background: #000;
         display: flex;
         justify-content: center;
@@ -953,14 +970,27 @@ ul {
 
     .form-section {
         padding-top: 0px;
-        /* Reduced to 0px per user request */
+        padding-bottom: 30px;
+        /* Reduced to tighten gap with video section */
     }
-}
 
+    .video-section {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        /* Reduced gap with courses */
+    }
 
-/* Sections General */
-section {
-    padding: 80px 0;
+    .courses {
+        padding-top: 30px;
+        /* Reduced gap from video section */
+        padding-bottom: 30px;
+        /* Reduced gap with success stories */
+    }
+
+    .success-stories-section {
+        padding-top: 30px;
+        /* Reduced gap from courses section */
+    }
 }
 
 h2 {
@@ -1797,10 +1827,16 @@ h2 {
 
     .btn-about {
         order: 2 !important;
-        width: auto !important;
+        width: calc(40% - 6px) !important;
+        /* Matched to mobile-hire-link */
         padding: 6px 12px !important;
         font-size: 0.75rem !important;
         display: flex !important;
+        justify-content: center !important;
+        /* Ensure centered text */
+        align-items: center !important;
+        height: 38px !important;
+        /* Match height for consistency */
     }
 
     /* Row 2: Phone (3) and Hire (4) */
