@@ -53,6 +53,20 @@ ul {
     text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
 }
 
+.d-none {
+    display: none;
+}
+
+.mobile-break {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-break {
+        display: block;
+    }
+}
+
 .btn-primary {
     background-color: var(--secondary-color);
     /* Purple button */
@@ -837,10 +851,38 @@ ul {
     }
 
     .hero-text h1 {
-        font-size: 1.4rem;
+        font-size: 1.25rem;
         font-weight: 700;
         color: #fff;
         text-align: center;
+    }
+
+    .placement-header {
+        width: fit-content;
+        margin: 0 auto 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        /* Ensure it's visible */
+    }
+
+    .placement-count,
+    .placement-salary {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .placement-number {
+        font-size: 14px;
+        font-weight: 700;
+        color: #FFA500;
+    }
+
+    .placement-text {
+        font-size: 8px;
+        color: #ccc;
     }
 
     .hero-text p {
@@ -860,30 +902,50 @@ ul {
 
     /* OPTIONS */
     .background-options {
-        width: 100%;
+        width: 70%;
         display: flex;
         justify-content: center;
-        /* ✅ CENTER */
         gap: 10px;
+        margin: 10px auto 0;
+    }
+
+    .bg-option {
+        padding: 6px 12px;
+        min-height: 40px;
+        height: auto;
+        font-size: 10px;
+        flex: 1;
+        /* Stretch to fill container */
+        width: auto;
+        justify-content: center;
     }
 
     /* STATS */
     .stats-card {
-        width: 75%;
+        width: 70%;
         margin: 20px auto 0;
-        /* ✅ CENTER */
-        padding: 5px 16px;
+        padding: 10px 16px;
         background: rgba(139, 69, 19, 0.3);
         border: 1px solid rgba(255, 165, 0, 0.3);
         text-align: center;
     }
 
+    .stats-number {
+        font-size: 20px;
+        color: #FFA500;
+        font-weight: 700;
+    }
+
+    .stats-label {
+        font-size: 10px;
+        color: #FFA500;
+    }
+
     /* BUTTON */
     .hero-btn {
-        width: 75%;
+        width: 70%;
         height: 48px;
         margin: 20px auto 0;
-        /* ✅ CENTER */
         font-size: 1rem;
         background: #dc143c;
         border-radius: 8px;
