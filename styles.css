@@ -258,6 +258,10 @@ ul {
 }
 
 @media (max-width: 768px) {
+    .santa-video-wrapper {
+        display: none !important;
+    }
+
     .hero {
         padding: 120px 0 40px 0;
     }
