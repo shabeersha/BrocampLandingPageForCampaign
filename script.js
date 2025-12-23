@@ -161,11 +161,17 @@ videoCards.forEach(card => {
         video.addEventListener('ended', resetState);
     }
 
-    card.addEventListener('click', function () {
+    card.addEventListener('click', function (e) {
+        // Prevent click if user was dragging
+        const container = this.closest('.carousel-track-container');
+        if (container && container.dataset.wasDragging === "true") {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+
         const video = this.querySelector('.story-thumb-video');
         const playBtn = this.querySelector('.play-button-small');
-        // Find parent container to stop its specific auto-scroll
-        const container = this.closest('.carousel-track-container');
 
         if (video) {
             // Unmute and Play
@@ -291,6 +297,51 @@ trackContainers.forEach(container => {
 
     // Start Loop
     animate();
+
+    // --- Drag to Scroll Implementation ---
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let checkDragThreshold = false;
+
+    container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.classList.add('active'); // Optional: for cursor grabbing style
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+        checkDragThreshold = true;
+        container.dataset.wasDragging = "false";
+    });
+
+    container.addEventListener('mouseleave', () => {
+        isDown = false;
+        container.classList.remove('active');
+    });
+
+    container.addEventListener('mouseup', () => {
+        isDown = false;
+        container.classList.remove('active');
+        // Keep wasDragging true for a moment so click handler can see it
+        setTimeout(() => {
+            container.dataset.wasDragging = "false";
+        }, 50);
+    });
+
+    container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll-fast
+
+        // Threshold check to avoid blocking simple clicks
+        if (checkDragThreshold && Math.abs(x - startX) > 5) {
+            container.dataset.wasDragging = "true";
+            checkDragThreshold = false;
+        }
+
+        container.scrollLeft = scrollLeft - walk;
+    });
 });
 
 // Hero Image Auto-Slider (Fade Effect - 6 Seconds) & Santa Sync
