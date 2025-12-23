@@ -295,6 +295,9 @@ if (heroTrack) {
 
     // Function to play santa animation (Linked to slide change)
     const playSantaCycle = () => {
+        // Disable on mobile/tablet (Save resources)
+        if (window.innerWidth <= 992) return;
+
         if (santaWrapper && santaVideo) {
             // Wait 2 seconds after slide change, then peek
             setTimeout(() => {
