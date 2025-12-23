@@ -2024,3 +2024,60 @@ h2 {
         text-align: center !important;
     }
 }
+
+/* Hanging Star Feature */
+.question-mark-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hanging-star {
+    position: absolute;
+    top: 85%;
+    /* Hangs from bottom of question mark */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.4em;
+    /* Smaller relative to text */
+    color: #FFD700;
+    /* Gold */
+    transform-origin: top center;
+    animation: swing 3s infinite ease-in-out;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+}
+
+@keyframes swing {
+    0% {
+        transform: translateX(-50%) rotate(15deg);
+    }
+
+    50% {
+        transform: translateX(-50%) rotate(-15deg);
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(15deg);
+    }
+}
+
+/* Hanging Christmas Symbol */
+.christmas-symbol-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hanging-symbol.bell {
+    position: absolute;
+    top: 65%;
+    /* Hangs from center/bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.35em;
+    /* Adjust size */
+    color: #FF0000;
+    /* Festive Red */
+    transform-origin: top center;
+    animation: swing 3s infinite ease-in-out;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.4));
+    z-index: 1;
+}
