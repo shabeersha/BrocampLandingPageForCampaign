@@ -143,11 +143,14 @@ if (leadForm) {
 }
 
 // Video Cards Click Logic
+// Video Cards Click Logic
 const videoCards = document.querySelectorAll('.video-facade-card');
 videoCards.forEach(card => {
     card.addEventListener('click', function () {
         const video = this.querySelector('.story-thumb-video');
         const playBtn = this.querySelector('.play-button-small');
+        // Find parent container to stop its specific auto-scroll
+        const container = this.closest('.carousel-track-container');
 
         if (video) {
             // Unmute and Play
@@ -160,6 +163,24 @@ videoCards.forEach(card => {
 
             // Ensure video stays full opacity
             video.style.opacity = '1';
+
+            // LOCK AUTO-SCROLL & CENTER VIDEO
+            if (container) {
+                container.dataset.isPlaying = "true"; // Flag to stop auto-scroll loop
+
+                // Calculate position to center the card
+                // card.offsetLeft is relative to the track, we need to subtract container center
+                const cardLeft = this.closest('li').offsetLeft;
+                const cardWidth = this.closest('li').offsetWidth;
+                const containerWidth = container.offsetWidth;
+
+                const targetScroll = cardLeft - (containerWidth / 2) + (cardWidth / 2);
+
+                container.scrollTo({
+                    left: targetScroll,
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });
@@ -218,7 +239,8 @@ trackContainers.forEach(container => {
     }
 
     function animate() {
-        if (!isPaused) {
+        // Stop auto-scroll if user is interacting OR if a video is playing
+        if (!isPaused && container.dataset.isPlaying !== "true") {
             const maxScroll = container.scrollWidth / 2; // Assuming content is doubled
 
             if (isReverse) {
