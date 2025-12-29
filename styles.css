@@ -16,6 +16,10 @@
     --container-width: 1200px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -589,6 +593,46 @@ ul {
     background: linear-gradient(90deg, #8b0000, #a52a2a);
     /* Dark Red */
     box-shadow: 0 10px 25px rgba(139, 0, 0, 0.3);
+}
+
+/* International Telephone Input Overrides */
+.iti {
+    width: 100%;
+}
+
+.iti__country-list {
+    background-color: #0f1113 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    white-space: normal;
+    /* Fix for long country names */
+    width: 300px;
+    /* Optional: wider dropdown */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.iti__country {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.iti__country-name {
+    color: #fff !important;
+}
+
+.iti__dial-code {
+    color: #909397 !important;
+}
+
+.iti__country:hover,
+.iti__country.iti__highlight {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Adjust padding for the input since flag container is absolute */
+.form-group input#phone {
+    padding-left: 90px !important;
+    /* Increased to avoid overlap with +91 etc */
 }
 
 .btn-submit:hover {
@@ -2066,19 +2110,46 @@ h2 {
     display: inline-block;
 }
 
-.hanging-symbol.bell {
+.hanging-symbol.ball-img {
     position: absolute;
-    top: 65%;
-    /* Hangs from center/bottom */
+    top: 55%;
+    /* Adjust based on image string length */
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.35em;
-    /* Adjust size */
-    color: transparent;
-    text-shadow: 0 0 0 #800020;
-    /* Grape/Dark Red */
+    width: 20px;
+    /* Size of the ball */
+    height: auto;
     transform-origin: top center;
     animation: swing 3s infinite ease-in-out;
-    filter: drop-shadow(0 0 3px rgba(128, 0, 32, 0.4));
-    z-index: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .course-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        padding-bottom: 20px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .course-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .course-card {
+        min-width: 85%;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+    }
+
+    .course-card p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }

@@ -105,6 +105,19 @@ const leadForm = document.getElementById('leadForm');
 // REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxo1pJcZmYlnDeFUcbs5vR7i-oRAxN16vrdbd_Q0mrMChhCdRyeg0xJny5Z_EQ8vE-2Bw/exec';
 
+// International Telephone Input Initialization
+const phoneInput = document.querySelector("#phone");
+let iti; // Instance variable
+
+if (phoneInput) {
+    iti = window.intlTelInput(phoneInput, {
+        initialCountry: "in",
+        separateDialCode: true,
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        preferredCountries: ["in", "ae", "us", "uk"],
+    });
+}
+
 if (leadForm) {
     leadForm.addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent page reload
@@ -124,6 +137,11 @@ if (leadForm) {
 
         // Collect Form Data
         const formData = new FormData(leadForm);
+
+        // Append full phone number with country code
+        if (iti) {
+            formData.set('phone', iti.getNumber());
+        }
 
         // Send to Google Sheets in background
         fetch(scriptURL, { method: 'POST', body: formData })
