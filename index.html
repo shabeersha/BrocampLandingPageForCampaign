@@ -138,10 +138,10 @@
                     <div class="form-group">
                         <select name="background" id="background" required>
                             <option value="" disabled selected>What best describes you?</option>
-                            <option value="btech">B.Tech</option>
-                            <option value="degree">Degree</option>
-                            <option value="plus_two">Plus Two</option>
-                            <option value="other">Other</option>
+                            <option value="student">Student</option>
+                            <option value="fresher">Fresher</option>
+                            <option value="working">Working</option>
+                            <option value="career_gap">Career Gap</option>
                         </select>
                     </div>
                     <button type="submit" class="btn-primary btn-submit">Talk To Our Career Expert</button>
@@ -612,8 +612,60 @@
         </div>
     </section>
 
+    <!-- Scroll Popup Modal -->
+    <div id="scrollPopup" class="popup-modal">
+        <div class="popup-content-new">
+            <span class="close-btn-new">&times;</span>
+            <div class="popup-header-new">
+                <h3>Talk to our career experts to help you find a <span>suitable career path</span></h3>
+            </div>
+            <form class="contact-form-new" id="popupForm">
+                <div class="form-row">
+                    <div class="form-group-new half">
+                        <label>First Name <span class="required">*</span></label>
+                        <input type="text" name="firstName" required>
+                    </div>
+                    <div class="form-group-new half">
+                        <label>Last Name <span class="required">*</span></label>
+                        <input type="text" name="lastName" required>
+                    </div>
+                </div>
 
+                <div class="form-group-new">
+                    <label>Email</label>
+                    <input type="email" name="email">
+                </div>
 
+                <div class="form-group-new">
+                    <label>Contact Number <span class="required">*</span></label>
+                    <input type="tel" name="phone" id="popupPhoneNew" required>
+                </div>
+
+                <div class="form-group-new">
+                    <label>What represent you the best?</label>
+                    <select name="background" required>
+                        <option value="" disabled selected>select</option>
+                        <option value="student">Student</option>
+                        <option value="fresher">Fresher</option>
+                        <option value="working">Working</option>
+                        <option value="career_gap">Career Gap</option>
+                    </select>
+                </div>
+
+                <div class="form-group-new">
+                    <label>Language <span class="required">*</span></label>
+                    <select name="language" required>
+                        <option value="" disabled selected>Select Language</option>
+                        <option value="malayalam">Malayalam</option>
+                        <option value="tamil">Tamil</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit-new">TALK TO OUR CAREER EXPERT</button>
+                <a href="https://www.brototype.com/brocamp/" class="know-more-link">I want to know more</a>
+            </form>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     <script src="script.js"></script>

@@ -115,6 +115,7 @@ if (phoneInput) {
         separateDialCode: true,
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
         preferredCountries: ["in", "ae", "us", "uk"],
+        autoPlaceholder: "off",
     });
 }
 
@@ -418,4 +419,96 @@ if (heroTrack) {
         playSantaCycle();
 
     }, 6000); // 6 seconds
+}
+
+// Scroll Popup Logic
+const scrollPopup = document.getElementById('scrollPopup');
+const closeBtn = document.querySelector('.close-btn-new');
+const popupForm = document.getElementById('popupForm');
+
+if (scrollPopup && closeBtn) {
+    const showPopupOnScroll = () => {
+        // Show popup after scrolling 300px
+        if (window.scrollY > 300) {
+            scrollPopup.classList.add('show');
+            // Remove listener so it acts ONLY ONCE per page load
+            window.removeEventListener('scroll', showPopupOnScroll);
+        }
+    };
+
+    window.addEventListener('scroll', showPopupOnScroll);
+
+    // Close Button
+    closeBtn.addEventListener('click', () => {
+        scrollPopup.classList.remove('show');
+    });
+
+    // Close on Outside Click
+    window.addEventListener('click', (e) => {
+        if (e.target === scrollPopup) {
+            scrollPopup.classList.remove('show');
+        }
+    });
+}
+
+// Popup Phone Input Init
+const popupPhone = document.querySelector("#popupPhoneNew");
+let itiPopup;
+
+if (popupPhone) {
+    itiPopup = window.intlTelInput(popupPhone, {
+        initialCountry: "in",
+        separateDialCode: true,
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        preferredCountries: ["in", "ae", "us", "uk"],
+        autoPlaceholder: "off",
+    });
+}
+
+// Popup Form Submission
+if (popupForm) {
+    popupForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Visual Feedback
+        const originalBtnText = popupForm.querySelector('button').innerText;
+        popupForm.querySelector('button').innerText = "Requesting...";
+        popupForm.querySelector('button').disabled = true;
+
+        // Collect Data
+        const formData = new FormData(popupForm);
+
+        // Handle name fields
+        const firstName = formData.get('firstName');
+        const lastName = formData.get('lastName');
+        formData.append('fullName', `${firstName} ${lastName}`);
+
+        if (itiPopup) {
+            formData.set('phone', itiPopup.getNumber());
+        }
+
+        // Send to same Google Sheet
+        fetch(scriptURL, { method: 'POST', body: formData })
+            .then(() => {
+                // Success UI in Popup
+                const popupContent = scrollPopup.querySelector('.popup-content-new');
+                popupContent.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px;">
+                        <span class="close-btn-new" onclick="document.getElementById('scrollPopup').classList.remove('show')">&times;</span>
+                        <h3 style="color: #333; margin-bottom: 10px;">Thank You!</h3>
+                        <p style="color: #666;">We will contact you shortly.</p>
+                    </div>
+                `;
+
+                // Close after 3 seconds
+                setTimeout(() => {
+                    scrollPopup.classList.remove('show');
+                }, 3000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                popupForm.querySelector('button').innerText = originalBtnText;
+                popupForm.querySelector('button').disabled = false;
+            });
+    });
 }
