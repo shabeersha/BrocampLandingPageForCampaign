@@ -1884,6 +1884,21 @@ h2 {
     .story-card:hover {
         transform: none;
     }
+
+    .carousel-track-container {
+        overflow-x: auto;
+        /* Enable manual scroll */
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Firefox */
+        pointer-events: auto;
+    }
+
+    .carousel-track-container::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+    }
 }
 
 .carousel-container.second-row {
