@@ -125,15 +125,28 @@
                 <img src="Hub image.png" alt="Brototype Hub" class="hub-image" width="800" height="500" loading="lazy">
             </div>
             <div class="form-content">
-                <form class="contact-form" id="leadForm">
+                <form class="contact-form" id="leadForm" action="https://crm.zoho.in/crm/WebToLeadForm" method="POST"
+                    target="hidden-zoho-frame">
+                    <!-- Zoho Hidden Identifiers -->
+                    <input type="text" style="display:none;" name="xnQsjsdp"
+                        value="9091dd7ddcfcba86e4ce25b72d0151e2c1ac3e15062d801af6b4db8632cd08b5">
+                    <input type="hidden" name="zc_gad" id="zc_gad" value="">
+                    <input type="text" style="display:none;" name="xmIwtLD"
+                        value="d8533cb6dc31df7b262bf6c559b3629c192e7fc34daeb8b75233aa8abaf3e6e59c423ee3158754444f4dad003d144483">
+                    <input type="text" style="display:none;" name="actionType" value="TGVhZHM=">
+                    <input type="text" style="display:none;" name="returnURL"
+                        value="https://brototype.sanoofpadikkal.in/">
+                    <input type="text" style="display:none;" name="Lead Source" value="Website Leads">
+                    <input type="hidden" name="First Name" value="-"> <!-- Default for single name field -->
+
                     <div class="form-group">
-                        <input type="text" placeholder="Name" name="fullName" id="fullName" required>
+                        <input type="text" placeholder="Name" name="Last Name" id="fullName" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" placeholder="Contact Number" name="phone" id="phone" required>
+                        <input type="tel" placeholder="Contact Number" name="Phone" id="phone" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Email" name="email" id="email" required>
+                        <input type="email" placeholder="Email" name="Email" id="email" required>
                     </div>
                     <div class="form-group">
                         <select name="background" id="background" required>
@@ -594,26 +607,37 @@
             <div class="popup-header-new">
                 <h3>Talk to our career experts to help you find a <span>suitable career path</span></h3>
             </div>
-            <form class="contact-form-new" id="popupForm">
+            <form class="contact-form-new" id="popupForm" action="https://crm.zoho.in/crm/WebToLeadForm" method="POST"
+                target="hidden-zoho-frame">
+                <!-- Zoho Hidden Identifiers -->
+                <input type="text" style="display:none;" name="xnQsjsdp"
+                    value="9091dd7ddcfcba86e4ce25b72d0151e2c1ac3e15062d801af6b4db8632cd08b5">
+                <input type="hidden" name="zc_gad" id="zc_gad" value="">
+                <input type="text" style="display:none;" name="xmIwtLD"
+                    value="d8533cb6dc31df7b262bf6c559b3629c192e7fc34daeb8b75233aa8abaf3e6e59c423ee3158754444f4dad003d144483">
+                <input type="text" style="display:none;" name="actionType" value="TGVhZHM=">
+                <input type="text" style="display:none;" name="returnURL" value="https://brototype.sanoofpadikkal.in/">
+                <input type="text" style="display:none;" name="Lead Source" value="Website Leads">
+
                 <div class="form-row">
                     <div class="form-group-new half">
                         <label>First Name <span class="required">*</span></label>
-                        <input type="text" name="firstName" required>
+                        <input type="text" name="First Name" required>
                     </div>
                     <div class="form-group-new half">
                         <label>Last Name <span class="required">*</span></label>
-                        <input type="text" name="lastName" required>
+                        <input type="text" name="Last Name" required>
                     </div>
                 </div>
 
                 <div class="form-group-new">
                     <label>Email</label>
-                    <input type="email" name="email">
+                    <input type="email" name="Email">
                 </div>
 
                 <div class="form-group-new">
                     <label>Contact Number <span class="required">*</span></label>
-                    <input type="tel" name="phone" id="popupPhoneNew" required>
+                    <input type="tel" name="Phone" id="popupPhoneNew" required>
                 </div>
 
                 <div class="form-group-new">
@@ -629,7 +653,7 @@
 
                 <div class="form-group-new">
                     <label>Language <span class="required">*</span></label>
-                    <select name="language" required>
+                    <select name="LEADCF33" required>
                         <option value="" disabled selected>Select Language</option>
                         <option value="malayalam">Malayalam</option>
                         <option value="tamil">Tamil</option>
@@ -641,6 +665,9 @@
             </form>
         </div>
     </div>
+    <!-- Hidden Iframe for Zoho Submission -->
+    <iframe name="hidden-zoho-frame" id="hidden-zoho-frame" style="display:none;"></iframe>
+
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     <script src="script.js" defer></script>

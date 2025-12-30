@@ -105,9 +105,6 @@ if (heroBtn) {
 // Form Submission Logic
 const leadForm = document.getElementById('leadForm');
 
-// REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxo1pJcZmYlnDeFUcbs5vR7i-oRAxN16vrdbd_Q0mrMChhCdRyeg0xJny5Z_EQ8vE-2Bw/exec';
-
 // International Telephone Input Initialization
 const phoneInput = document.querySelector("#phone");
 let iti; // Instance variable
@@ -124,7 +121,8 @@ if (phoneInput) {
 
 if (leadForm) {
     leadForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent page reload
+        // Prevent default submission to validate first
+        e.preventDefault();
 
         // Validate Phone Number
         if (iti && !iti.isValidNumber()) {
@@ -154,7 +152,44 @@ if (leadForm) {
             if (errorMsg) errorMsg.style.display = 'none';
         }
 
-        // Show Success UI Immediately for better UX
+        // --- Zoho & Data Prep ---
+        // 1. Update Phone Field with Full Number (for Zoho)
+        if (iti) {
+            const fullPhone = iti.getNumber();
+            // We need to set the value of the actual input so standard POST sends it
+            const phoneField = leadForm.querySelector('input[name="Phone"]');
+            if (phoneField) phoneField.value = fullPhone;
+        }
+
+        // 2. Handle Name Splitting (Full Name -> First + Last)
+        const fullNameInput = leadForm.querySelector('input[name="Last Name"]'); // We reused this ID
+        const firstNameHidden = leadForm.querySelector('input[name="First Name"]');
+
+        if (fullNameInput && firstNameHidden) {
+            const rawName = fullNameInput.value.trim();
+            const nameParts = rawName.split(' ');
+
+            if (nameParts.length > 1) {
+                // Determine First Name (Everything up to last word? Or First word?)
+                // Standard: First Name is first word. Last Name is the rest.
+                // Zoho provided form has First Name as mandatory. 
+                // Let's use: First Name = First Word, Last Name = Rest.
+                const fName = nameParts[0];
+                const lName = nameParts.slice(1).join(' ');
+
+                firstNameHidden.value = fName;
+                fullNameInput.value = lName; // Update value for POST
+            } else {
+                // Single word
+                firstNameHidden.value = "-"; // or "Unknown"
+                fullNameInput.value = rawName;
+            }
+        }
+
+        // 3. Submit to Zoho Iframe
+        leadForm.submit();
+
+        // 4. Show Success UI Immediately
         const formContent = document.querySelector('.form-content');
         const successMessage = document.createElement('div');
         successMessage.className = 'form-success-message';
@@ -167,28 +202,10 @@ if (leadForm) {
         leadForm.style.display = 'none';
         formContent.appendChild(successMessage);
 
-        // Collect Form Data
-        const formData = new FormData(leadForm);
-
-        // Append full phone number with country code
-        if (iti) {
-            formData.set('phone', iti.getNumber());
-        }
-
-        // Send to Google Sheets in background
-        fetch(scriptURL, { method: 'POST', body: formData })
-            .catch(error => console.error('Background Sync Error:', error.message));
-
-        // Reset form fields immediately in the hidden form
-        leadForm.reset();
-
-        // Restore form and remove success message after 5 seconds
+        // Reset form fields after delay (optional, but form/iframe reload might handle it)
         setTimeout(() => {
-            if (successMessage.parentNode) {
-                successMessage.parentNode.removeChild(successMessage);
-            }
-            leadForm.style.display = 'block';
-        }, 5000);
+            // Optional reset logic
+        }, 1000);
     });
 }
 
@@ -520,9 +537,9 @@ if (popupPhone) {
 // Popup Form Submission
 if (popupForm) {
     popupForm.addEventListener('submit', function (e) {
+        // Prevent default to validate
         e.preventDefault();
 
-        // Validate Phone Number
         // Validate Phone Number
         if (itiPopup && !itiPopup.isValidNumber()) {
             let errorMsg = popupForm.querySelector('#phone-error-msg');
@@ -534,7 +551,6 @@ if (popupForm) {
                 errorMsg.style.marginTop = '5px';
                 errorMsg.style.fontWeight = '500';
 
-                // Insert after the phone input container
                 const phoneInput = popupForm.querySelector('#popupPhoneNew');
                 if (phoneInput && phoneInput.parentNode) {
                     phoneInput.parentNode.parentNode.appendChild(errorMsg);
@@ -547,74 +563,54 @@ if (popupForm) {
             if (phoneField) phoneField.focus();
             return;
         } else {
-            // Clear error if valid
             const errorMsg = popupForm.querySelector('#phone-error-msg');
             if (errorMsg) errorMsg.style.display = 'none';
         }
 
-        // Visual Feedback
-        const originalBtnText = popupForm.querySelector('button').innerText;
-        popupForm.querySelector('button').innerText = "Submitting...";
-        popupForm.querySelector('button').disabled = true;
-
-        // Collect Data
-        const formData = new FormData(popupForm);
-
-        // Handle name fields
-        const firstName = formData.get('firstName');
-        const lastName = formData.get('lastName');
-        formData.append('fullName', `${firstName} ${lastName}`);
-
+        // --- Zoho Data Prep ---
         if (itiPopup) {
-            formData.set('phone', itiPopup.getNumber());
+            const fullPhone = itiPopup.getNumber();
+            // Important: Update 'Phone' input value
+            const phoneField = popupForm.querySelector('input[name="Phone"]');
+            if (phoneField) phoneField.value = fullPhone;
         }
 
-        // Send to same Google Sheet
-        fetch(scriptURL, { method: 'POST', body: formData })
-            .then(() => {
-                // Success UI in Popup (Hide Form, Show Message)
-                const popupContent = scrollPopup.querySelector('.popup-content-new');
-                const form = popupContent.querySelector('form');
-                const header = popupContent.querySelector('.popup-header-new');
+        // Submit to Zoho Iframe
+        popupForm.submit();
 
-                // Create or reuse success message container
-                let successMsg = popupContent.querySelector('.popup-success-msg');
-                if (!successMsg) {
-                    successMsg = document.createElement('div');
-                    successMsg.className = 'popup-success-msg';
-                    successMsg.style.textAlign = 'center';
-                    successMsg.style.padding = '40px 20px';
-                    // Background handled by parent
-                    successMsg.innerHTML = `
-                        <h3 style="color: #fff; margin-bottom: 10px;">Thank You!</h3>
-                        <p style="color: rgba(255, 255, 255, 0.7);">We will contact you shortly.</p>
-                    `;
-                    popupContent.appendChild(successMsg);
-                }
+        // --- UI Updates ---
+        const popupContent = scrollPopup.querySelector('.popup-content-new');
+        const form = popupContent.querySelector('form');
+        const header = popupContent.querySelector('.popup-header-new');
 
-                // Toggle Visibility & Change Background
-                form.style.display = 'none';
-                header.style.display = 'none';
-                successMsg.style.display = 'block';
-                popupContent.style.backgroundColor = '#000000'; // Make card black
+        let successMsg = popupContent.querySelector('.popup-success-msg');
+        if (!successMsg) {
+            successMsg = document.createElement('div');
+            successMsg.className = 'popup-success-msg';
+            successMsg.style.textAlign = 'center';
+            successMsg.style.padding = '40px 20px';
+            successMsg.innerHTML = `
+                <h3 style="color: #fff; margin-bottom: 10px;">Thank You!</h3>
+                <p style="color: rgba(255, 255, 255, 0.7);">We will contact you shortly.</p>
+            `;
+            popupContent.appendChild(successMsg);
+        }
 
-                // Reset and Restore after 5 seconds
-                setTimeout(() => {
-                    successMsg.style.display = 'none';
-                    form.style.display = 'block';
-                    header.style.display = 'block';
-                    popupContent.style.backgroundColor = '#ffffff'; // Restore white background
-                    form.reset();
-                    form.querySelector('button').innerText = originalBtnText;
-                    form.querySelector('button').disabled = false;
-                    scrollPopup.classList.remove('show');
-                }, 5000);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                popupForm.querySelector('button').innerText = originalBtnText;
-                popupForm.querySelector('button').disabled = false;
-            });
+        form.style.display = 'none';
+        header.style.display = 'none';
+        successMsg.style.display = 'block';
+        popupContent.style.backgroundColor = '#000000'; // Make card black
+
+        // Reset and Restore after 5 seconds
+        setTimeout(() => {
+            if (successMsg) successMsg.style.display = 'none';
+            if (form) form.style.display = 'block';
+            if (header) header.style.display = 'block';
+            if (popupContent) popupContent.style.backgroundColor = ''; // Restore default
+            form.reset();
+            form.querySelector('button').disabled = false;
+            // scrollPopup.classList.remove('show'); // Optional: Close popup
+        }, 5000);
     });
 }
 
