@@ -719,3 +719,18 @@ window.addEventListener('load', () => {
         courseGrid.addEventListener('mouseleave', startCourseAutoScroll);
     }
 });
+// --- Optimization: Pause Videos when Scrolled Out of View ---
+const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+            const video = entry.target;
+            if (!video.paused) {
+                video.pause();
+            }
+        }
+    });
+}, { threshold: 0.1 }); // Pause if less than 10% visible
+
+document.querySelectorAll('video').forEach(video => {
+    videoObserver.observe(video);
+});
