@@ -1679,13 +1679,17 @@ h2 {
 
 .carousel-container {
     position: relative;
-    height: 600px;
-    /* Increased height for Story format (9:16) */
+    height: 520px;
+    /* Adjusted for video-only cards */
     width: 100%;
-    margin: 50px auto;
+    margin: 20px auto;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.carousel-container.second-row {
+    margin-top: 0;
 }
 
 .carousel-track-container {
