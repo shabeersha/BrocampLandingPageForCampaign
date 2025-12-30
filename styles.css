@@ -1671,6 +1671,12 @@ h2 {
     /* Hide overflow from container */
 }
 
+@media (max-width: 768px) {
+    .success-stories-section {
+        padding-top: 40px;
+    }
+}
+
 .carousel-container {
     position: relative;
     height: 600px;
@@ -1849,8 +1855,32 @@ h2 {
 
 @media (max-width: 768px) {
     .carousel-slide {
-        width: 300px;
-        /* Smaller cards on mobile */
+        width: 50vw;
+        /* Show 2 items (approx) on mobile */
+        padding: 0 5px;
+    }
+
+    .story-card {
+        height: 300px;
+    }
+
+    .story-info h3 {
+        font-size: 1rem;
+    }
+
+    .story-info p {
+        font-size: 0.8rem;
+    }
+
+    .carousel-container {
+        height: 380px;
+        /* Reduced from 600px default */
+        margin: 20px auto;
+    }
+
+    .carousel-container.second-row {
+        margin-top: 0;
+        /* Bring closer to first row */
     }
 }
 
