@@ -1875,7 +1875,7 @@ h2 {
     }
 
     .carousel-container.second-row {
-        margin-top: 30px;
+        margin-top: 20px;
         /* Increased gap between rows */
     }
 
@@ -1907,10 +1907,7 @@ h2 {
     }
 }
 
-.carousel-container.second-row {
-    margin-top: -30px;
-    /* Adjust overlap for taller cards */
-}
+
 
 .carousel-track.reverse-track {
     animation-direction: reverse;
