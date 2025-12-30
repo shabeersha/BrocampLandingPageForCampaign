@@ -228,8 +228,12 @@ if (leadForm) {
 
         // Reset form fields after delay (optional, but form/iframe reload might handle it)
         setTimeout(() => {
-            // Optional reset logic
-        }, 1000);
+            if (successMessage.parentNode) {
+                successMessage.parentNode.removeChild(successMessage);
+            }
+            leadForm.style.display = 'block';
+            leadForm.reset();
+        }, 5000);
     });
 }
 
