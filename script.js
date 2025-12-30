@@ -167,27 +167,8 @@ if (leadForm) {
         // 2. Handle Name Splitting (Full Name -> First + Last)
         const fullNameInput = leadForm.querySelector('input[name="Last Name"]'); // We reused this ID
         const firstNameHidden = leadForm.querySelector('input[name="First Name"]');
-
-        if (fullNameInput && firstNameHidden) {
-            const rawName = fullNameInput.value.trim();
-            const nameParts = rawName.split(' ');
-
-            if (nameParts.length > 1) {
-                // Determine First Name (Everything up to last word? Or First word?)
-                // Standard: First Name is first word. Last Name is the rest.
-                // Zoho provided form has First Name as mandatory. 
-                // Let's use: First Name = First Word, Last Name = Rest.
-                const fName = nameParts[0];
-                const lName = nameParts.slice(1).join(' ');
-
-                firstNameHidden.value = fName;
-                fullNameInput.value = lName; // Update value for POST
-            } else {
-                // Single word
-                firstNameHidden.value = "-"; // or "Unknown"
-                fullNameInput.value = rawName;
-            }
-        }
+        // This logic is removed as Zoho form now has separate First Name and Last Name fields.
+        // The form directly submits these fields.
 
         // 3. Submit to Zoho Iframe
         leadForm.submit();
@@ -195,12 +176,13 @@ if (leadForm) {
         // 4. Background Sync to Google Sheets (Legacy Mapping)
         try {
             const googleFormData = new FormData();
-            const nameVal = leadForm.querySelector('input[name="Last Name"]').value; // Inline form uses "Last Name" for full name
+            const fName = leadForm.querySelector('input[name="First Name"]').value;
+            const lName = leadForm.querySelector('input[name="Last Name"]').value;
             const emailVal = leadForm.querySelector('input[name="Email"]').value;
             const phoneVal = iti ? iti.getNumber() : "";
-            const bgSelect = leadForm.querySelector('select[name="background"]');
+            const bgSelect = leadForm.querySelector('select[name="LEADCF5"]'); // Was 'background'
 
-            googleFormData.append("fullName", nameVal);
+            googleFormData.append("fullName", `${fName} ${lName}`);
             googleFormData.append("email", emailVal);
             googleFormData.append("phone", phoneVal);
             if (bgSelect) googleFormData.append("background", bgSelect.value);
