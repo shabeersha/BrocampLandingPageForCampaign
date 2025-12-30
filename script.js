@@ -618,3 +618,44 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(el);
     });
 });
+
+// Mobile Course Carousel Auto-Scroll
+const courseGrid = document.querySelector('.course-grid');
+if (courseGrid) {
+    let courseInterval;
+    const startCourseAutoScroll = () => {
+        if (window.innerWidth > 768) {
+            clearInterval(courseInterval);
+            return;
+        }
+
+        clearInterval(courseInterval);
+        courseInterval = setInterval(() => {
+            // Check if we are near the end
+            if (courseGrid.scrollLeft + courseGrid.clientWidth >= courseGrid.scrollWidth - 50) {
+                courseGrid.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                const card = courseGrid.querySelector('.course-card');
+                if (card) {
+                    const cardWidth = card.offsetWidth;
+                    const gap = 20; // Match CSS gap
+                    courseGrid.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+                }
+            }
+        }, 3000);
+    };
+
+    const stopCourseAutoScroll = () => clearInterval(courseInterval);
+
+    // Initial Start
+    startCourseAutoScroll();
+
+    // Handle Resize
+    window.addEventListener('resize', startCourseAutoScroll);
+
+    // Pause on Interaction
+    courseGrid.addEventListener('touchstart', stopCourseAutoScroll, { passive: true });
+    courseGrid.addEventListener('touchend', () => {
+        setTimeout(startCourseAutoScroll, 3000); // Resume after delay
+    });
+}
