@@ -2373,3 +2373,64 @@ h2 {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Carousel Navigation Buttons (Mobile) */
+.carousel-nav {
+    display: none;
+    /* Hidden on Desktop */
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .carousel-nav {
+        display: flex;
+        pointer-events: none;
+        /* Let clicks pass through container area */
+        position: absolute;
+        bottom: 47px;
+        right: 15px;
+        top: auto;
+        left: auto;
+        z-index: 10;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
+        /* Close to each other */
+        padding: 0;
+    }
+
+    .nav-btn {
+        pointer-events: auto;
+        /* Re-enable for buttons */
+        width: 36px;
+        height: 36px;
+        background: transparent;
+        /* No background */
+        border: none;
+        /* No border */
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+        outline: none;
+        backdrop-filter: none;
+    }
+
+    .nav-btn svg {
+        width: 18px;
+        height: 18px;
+        stroke: #ccc;
+        /* Light grey arrow */
+    }
+
+    .nav-btn:active {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(0.95);
+    }
+}

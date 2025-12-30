@@ -692,6 +692,28 @@ window.addEventListener('load', () => {
             setTimeout(startCourseAutoScroll, 4000);
         });
 
+        // Navigation Buttons Logic
+        const prevBtn = document.querySelector('.nav-btn.prev');
+        const nextBtn = document.querySelector('.nav-btn.next');
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                stopCourseAutoScroll();
+                const card = courseGrid.querySelector('.course-card');
+                const scrollAmount = card ? card.offsetWidth + 20 : 300;
+                courseGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                setTimeout(startCourseAutoScroll, 4000); // Restart auto-scroll after delay
+            });
+
+            nextBtn.addEventListener('click', () => {
+                stopCourseAutoScroll();
+                const card = courseGrid.querySelector('.course-card');
+                const scrollAmount = card ? card.offsetWidth + 20 : 300;
+                courseGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                setTimeout(startCourseAutoScroll, 4000); // Restart auto-scroll after delay
+            });
+        }
+
         // Also pause on mouse interaction (desktop dev testing)
         courseGrid.addEventListener('mouseenter', stopCourseAutoScroll);
         courseGrid.addEventListener('mouseleave', startCourseAutoScroll);
