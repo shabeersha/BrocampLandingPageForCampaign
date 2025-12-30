@@ -1895,6 +1895,12 @@ h2 {
         pointer-events: auto;
     }
 
+    /* Force track to be wide enough for scrolling */
+    .carousel-track {
+        width: max-content;
+        display: flex;
+    }
+
     .carousel-track-container::-webkit-scrollbar {
         display: none;
         /* Chrome/Safari */
