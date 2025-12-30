@@ -105,6 +105,9 @@ if (heroBtn) {
 // Form Submission Logic
 const leadForm = document.getElementById('leadForm');
 
+// Google Apps Script URL (Restored)
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxo1pJcZmYlnDeFUcbs5vR7i-oRAxN16vrdbd_Q0mrMChhCdRyeg0xJny5Z_EQ8vE-2Bw/exec';
+
 // International Telephone Input Initialization
 const phoneInput = document.querySelector("#phone");
 let iti; // Instance variable
@@ -189,7 +192,28 @@ if (leadForm) {
         // 3. Submit to Zoho Iframe
         leadForm.submit();
 
-        // 4. Show Success UI Immediately
+        // 4. Background Sync to Google Sheets (Legacy Mapping)
+        try {
+            const googleFormData = new FormData();
+            const nameVal = leadForm.querySelector('input[name="Last Name"]').value; // Inline form uses "Last Name" for full name
+            const emailVal = leadForm.querySelector('input[name="Email"]').value;
+            const phoneVal = iti ? iti.getNumber() : "";
+            const bgSelect = leadForm.querySelector('select[name="background"]');
+
+            googleFormData.append("fullName", nameVal);
+            googleFormData.append("email", emailVal);
+            googleFormData.append("phone", phoneVal);
+            if (bgSelect) googleFormData.append("background", bgSelect.value);
+            // Add timestamp
+            googleFormData.append("date", new Date().toLocaleString());
+
+            fetch(scriptURL, { method: 'POST', body: googleFormData })
+                .catch(error => console.error('Google Sheet Sync Error:', error));
+        } catch (err) {
+            console.error("Sheet Prep Error:", err);
+        }
+
+        // 5. Show Success UI Immediately
         const formContent = document.querySelector('.form-content');
         const successMessage = document.createElement('div');
         successMessage.className = 'form-success-message';
@@ -577,6 +601,28 @@ if (popupForm) {
 
         // Submit to Zoho Iframe
         popupForm.submit();
+
+        // --- Google Sheets Sync (Legacy Mapping) ---
+        try {
+            const googleFormData = new FormData();
+            const fName = popupForm.querySelector('input[name="First Name"]').value;
+            const lName = popupForm.querySelector('input[name="Last Name"]').value;
+            const emailVal = popupForm.querySelector('input[name="Email"]').value;
+            const phoneVal = itiPopup ? itiPopup.getNumber() : "";
+            const bgSelect = popupForm.querySelector('select[name="background"]');
+            const langSelect = popupForm.querySelector('select[name="LEADCF33"]');
+
+            googleFormData.append("fullName", `${fName} ${lName}`);
+            googleFormData.append("email", emailVal);
+            googleFormData.append("phone", phoneVal);
+            if (bgSelect) googleFormData.append("background", bgSelect.value);
+            if (langSelect) googleFormData.append("language", langSelect.value);
+
+            fetch(scriptURL, { method: 'POST', body: googleFormData })
+                .catch(error => console.error('Google Sheet Sync Error:', error));
+        } catch (err) {
+            console.error("Sheet Prep Error:", err);
+        }
 
         // --- UI Updates ---
         const popupContent = scrollPopup.querySelector('.popup-content-new');
