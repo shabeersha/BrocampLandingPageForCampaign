@@ -126,6 +126,34 @@ if (leadForm) {
     leadForm.addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent page reload
 
+        // Validate Phone Number
+        if (iti && !iti.isValidNumber()) {
+            let errorMsg = leadForm.querySelector('#main-phone-error-msg');
+            if (!errorMsg) {
+                errorMsg = document.createElement('div');
+                errorMsg.id = 'main-phone-error-msg';
+                errorMsg.style.color = '#dc143c';
+                errorMsg.style.fontSize = '0.85rem';
+                errorMsg.style.marginTop = '5px';
+                errorMsg.style.fontWeight = '500';
+
+                const phoneInput = leadForm.querySelector('#phone');
+                if (phoneInput && phoneInput.parentNode) {
+                    phoneInput.parentNode.parentNode.appendChild(errorMsg);
+                }
+            }
+            errorMsg.innerText = "Please enter a valid phone number.";
+            errorMsg.style.display = 'block';
+
+            const phoneField = leadForm.querySelector('#phone');
+            if (phoneField) phoneField.focus();
+            return;
+        } else {
+            // Clear error if valid
+            const errorMsg = leadForm.querySelector('#main-phone-error-msg');
+            if (errorMsg) errorMsg.style.display = 'none';
+        }
+
         // Show Success UI Immediately for better UX
         const formContent = document.querySelector('.form-content');
         const successMessage = document.createElement('div');
@@ -473,6 +501,36 @@ if (popupForm) {
     popupForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
+        // Validate Phone Number
+        // Validate Phone Number
+        if (itiPopup && !itiPopup.isValidNumber()) {
+            let errorMsg = popupForm.querySelector('#phone-error-msg');
+            if (!errorMsg) {
+                errorMsg = document.createElement('div');
+                errorMsg.id = 'phone-error-msg';
+                errorMsg.style.color = '#dc143c';
+                errorMsg.style.fontSize = '0.85rem';
+                errorMsg.style.marginTop = '5px';
+                errorMsg.style.fontWeight = '500';
+
+                // Insert after the phone input container
+                const phoneInput = popupForm.querySelector('#popupPhoneNew');
+                if (phoneInput && phoneInput.parentNode) {
+                    phoneInput.parentNode.parentNode.appendChild(errorMsg);
+                }
+            }
+            errorMsg.innerText = "Please enter a valid phone number.";
+            errorMsg.style.display = 'block';
+
+            const phoneField = popupForm.querySelector('#popupPhoneNew');
+            if (phoneField) phoneField.focus();
+            return;
+        } else {
+            // Clear error if valid
+            const errorMsg = popupForm.querySelector('#phone-error-msg');
+            if (errorMsg) errorMsg.style.display = 'none';
+        }
+
         // Visual Feedback
         const originalBtnText = popupForm.querySelector('button').innerText;
         popupForm.querySelector('button').innerText = "Submitting...";
@@ -493,20 +551,43 @@ if (popupForm) {
         // Send to same Google Sheet
         fetch(scriptURL, { method: 'POST', body: formData })
             .then(() => {
-                // Success UI in Popup
+                // Success UI in Popup (Hide Form, Show Message)
                 const popupContent = scrollPopup.querySelector('.popup-content-new');
-                popupContent.innerHTML = `
-                    <div style="text-align: center; padding: 40px 20px;">
-                        <span class="close-btn-new" onclick="document.getElementById('scrollPopup').classList.remove('show')">&times;</span>
-                        <h3 style="color: #333; margin-bottom: 10px;">Thank You!</h3>
-                        <p style="color: #666;">We will contact you shortly.</p>
-                    </div>
-                `;
+                const form = popupContent.querySelector('form');
+                const header = popupContent.querySelector('.popup-header-new');
 
-                // Close after 3 seconds
+                // Create or reuse success message container
+                let successMsg = popupContent.querySelector('.popup-success-msg');
+                if (!successMsg) {
+                    successMsg = document.createElement('div');
+                    successMsg.className = 'popup-success-msg';
+                    successMsg.style.textAlign = 'center';
+                    successMsg.style.padding = '40px 20px';
+                    // Background handled by parent
+                    successMsg.innerHTML = `
+                        <h3 style="color: #fff; margin-bottom: 10px;">Thank You!</h3>
+                        <p style="color: rgba(255, 255, 255, 0.7);">We will contact you shortly.</p>
+                    `;
+                    popupContent.appendChild(successMsg);
+                }
+
+                // Toggle Visibility & Change Background
+                form.style.display = 'none';
+                header.style.display = 'none';
+                successMsg.style.display = 'block';
+                popupContent.style.backgroundColor = '#000000'; // Make card black
+
+                // Reset and Restore after 5 seconds
                 setTimeout(() => {
+                    successMsg.style.display = 'none';
+                    form.style.display = 'block';
+                    header.style.display = 'block';
+                    popupContent.style.backgroundColor = '#ffffff'; // Restore white background
+                    form.reset();
+                    form.querySelector('button').innerText = originalBtnText;
+                    form.querySelector('button').disabled = false;
                     scrollPopup.classList.remove('show');
-                }, 3000);
+                }, 5000);
             })
             .catch(error => {
                 console.error('Error:', error);
