@@ -285,70 +285,95 @@ trackContainers.forEach(container => {
     const track = container.querySelector('.carousel-track');
     const isReverse = track.classList.contains('reverse-track');
 
-    // Auto-scroll speed
-    const speed = 1; // Pixels per frame
+    // Desktop: Continuous Marquee
+    if (window.innerWidth > 768) {
+        // Auto-scroll speed
+        const speed = 1; // Pixels per frame
 
-    // State
-    let isPaused = false;
-    let animationId;
+        // State
+        let isPaused = false;
+        let animationId;
 
-    // Interaction Listeners to Pause/Resume
-    container.addEventListener('mouseenter', () => isPaused = true);
-    container.addEventListener('mouseleave', () => isPaused = false);
-    container.addEventListener('touchstart', () => isPaused = true, { passive: true });
-    container.addEventListener('touchend', () => {
-        setTimeout(() => isPaused = false, 1000); // Small delay on mobile before resuming
-    });
+        // Interaction Listeners
+        container.addEventListener('mouseenter', () => isPaused = true);
+        container.addEventListener('mouseleave', () => isPaused = false);
 
-    // Setup initial scroll position for reverse track
-    // We need to wait for layout? 
-    // Simplified: Reset logic handles it, but verify alignment.
-    if (isReverse) {
-        // Start reverse track at the "middle" (end of first set) so it can scroll backwards
-        // We rely on the loop check to set it initially if needed, or set it here:
-        // container.scrollLeft = container.scrollWidth / 2;
-    }
+        function animate() {
+            if (!isPaused && container.dataset.isPlaying !== "true") {
+                const maxScroll = container.scrollWidth / 2;
 
-    function animate() {
-        // Stop auto-scroll if user is interacting OR if a video is playing
-        if (!isPaused && container.dataset.isPlaying !== "true") {
-            const maxScroll = container.scrollWidth / 2; // Assuming content is doubled
-
-            if (isReverse) {
-                // Moving Right (ScrollLeft decreases)
-                container.scrollLeft -= speed;
-                // Loop handling: If we hit 0 (start), jump to middle
-                if (container.scrollLeft <= 0) {
-                    container.scrollLeft = maxScroll;
-                }
-            } else {
-                // Moving Left (ScrollLeft increases)
-                container.scrollLeft += speed;
-                // Loop handling: If we acceptable past the middle, jump to 0
-                if (container.scrollLeft >= maxScroll) {
-                    container.scrollLeft = 0;
+                if (isReverse) {
+                    container.scrollLeft -= speed;
+                    if (container.scrollLeft <= 0) {
+                        container.scrollLeft = maxScroll;
+                    }
+                } else {
+                    container.scrollLeft += speed;
+                    if (container.scrollLeft >= maxScroll) {
+                        container.scrollLeft = 0;
+                    }
                 }
             }
+            animationId = requestAnimationFrame(animate);
         }
-        animationId = requestAnimationFrame(animate);
+
+        if (isReverse) {
+            setTimeout(() => {
+                container.scrollLeft = container.scrollWidth / 2;
+            }, 100);
+        }
+        animate();
+    } else {
+        // Mobile: Snap Interval Scrolling (Like Course Carousel)
+        let intervalId;
+        const startMobileScroll = () => {
+            clearInterval(intervalId);
+            intervalId = setInterval(() => {
+                if (container.dataset.isPlaying === "true") return;
+
+                const cardWidth = container.querySelector('.carousel-slide').offsetWidth; // 50vw
+                const scrollAmount = cardWidth; // Scroll 1 item at a time
+
+                if (isReverse) {
+                    // Reverse Logic for Mobile
+                    if (container.scrollLeft <= 0) {
+                        container.scrollTo({ left: container.scrollWidth / 2, behavior: 'auto' }); // Jump to end silently
+                    } else {
+                        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    }
+                } else {
+                    // Forward Logic
+                    /* 
+                       Logic: check if we are at the "end" of the first set.
+                       Since we have duplicated items, maxScroll is roughly half total width.
+                    */
+                    const maxScroll = container.scrollWidth / 2;
+                    if (container.scrollLeft >= maxScroll) {
+                        container.scrollTo({ left: 0, behavior: 'auto' }); // Jump to start silently
+                    } else {
+                        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    }
+                }
+            }, 3000);
+        };
+
+        // Initialize Reverse Position
+        if (isReverse) {
+            setTimeout(() => {
+                container.scrollTo({ left: container.scrollWidth / 2, behavior: 'auto' });
+            }, 100);
+        }
+
+        startMobileScroll();
+
+        // Pause on Touch
+        container.addEventListener('touchstart', () => clearInterval(intervalId), { passive: true });
+        container.addEventListener('touchend', () => {
+            setTimeout(startMobileScroll, 4000);
+        });
     }
 
-    // Initialize Reverse Position immediately if possible/needed
-    // But since scrollWidth might not be ready, we let the loop handle or set it 
-    // safe check: 
-    if (isReverse) {
-        // We need to ensure scrollWidth is available, might need a slight delay or window load
-        // checking periodically in the animation loop is safer for jump logic
-        // But to start "in the middle":
-        setTimeout(() => {
-            container.scrollLeft = container.scrollWidth / 2;
-        }, 100);
-    }
-
-    // Start Loop
-    animate();
-
-    // --- Drag to Scroll Implementation ---
+    // --- Drag/Manual Scroll Implementation (Shared) ---
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -356,7 +381,7 @@ trackContainers.forEach(container => {
 
     container.addEventListener('mousedown', (e) => {
         isDown = true;
-        container.classList.add('active'); // Optional: for cursor grabbing style
+        container.classList.add('active');
         startX = e.pageX - container.offsetLeft;
         scrollLeft = container.scrollLeft;
         checkDragThreshold = true;
@@ -371,7 +396,6 @@ trackContainers.forEach(container => {
     container.addEventListener('mouseup', () => {
         isDown = false;
         container.classList.remove('active');
-        // Keep wasDragging true for a moment so click handler can see it
         setTimeout(() => {
             container.dataset.wasDragging = "false";
         }, 50);
@@ -379,17 +403,14 @@ trackContainers.forEach(container => {
 
     container.addEventListener('mousemove', (e) => {
         if (!isDown) return;
-
         e.preventDefault();
         const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 2; // Scroll-fast
+        const walk = (x - startX) * 2;
 
-        // Threshold check to avoid blocking simple clicks
         if (checkDragThreshold && Math.abs(x - startX) > 5) {
             container.dataset.wasDragging = "true";
             checkDragThreshold = false;
         }
-
         container.scrollLeft = scrollLeft - walk;
     });
 });

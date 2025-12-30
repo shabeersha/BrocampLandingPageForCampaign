@@ -1673,7 +1673,7 @@ h2 {
 
 @media (max-width: 768px) {
     .success-stories-section {
-        padding-top: 40px;
+        padding-top: 20px;
     }
 }
 
@@ -1881,6 +1881,12 @@ h2 {
     .carousel-container.second-row {
         margin-top: 0;
         /* Bring closer to first row */
+    }
+
+    /* Disable hover jump on mobile to prevent unstable movement */
+    /* Disable hover jump on mobile to prevent unstable movement */
+    .story-card:hover {
+        transform: none;
     }
 }
 
