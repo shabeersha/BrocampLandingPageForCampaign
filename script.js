@@ -93,9 +93,12 @@ function triggerConfettiFromElement(element) {
 const heroBtn = document.querySelector('.hero-btn');
 const formSection = document.querySelector('.form-section');
 
-if (heroBtn && formSection) {
+if (heroBtn) {
     heroBtn.addEventListener('click', () => {
-        formSection.scrollIntoView({ behavior: 'smooth' });
+        const popup = document.getElementById('scrollPopup');
+        if (popup) {
+            popup.classList.add('show');
+        }
     });
 }
 
@@ -472,7 +475,7 @@ if (popupForm) {
 
         // Visual Feedback
         const originalBtnText = popupForm.querySelector('button').innerText;
-        popupForm.querySelector('button').innerText = "Requesting...";
+        popupForm.querySelector('button').innerText = "Submitting...";
         popupForm.querySelector('button').disabled = true;
 
         // Collect Data
