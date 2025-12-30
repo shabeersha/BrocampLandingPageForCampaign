@@ -620,42 +620,59 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Mobile Course Carousel Auto-Scroll
-const courseGrid = document.querySelector('.course-grid');
-if (courseGrid) {
-    let courseInterval;
-    const startCourseAutoScroll = () => {
-        if (window.innerWidth > 768) {
-            clearInterval(courseInterval);
-            return;
-        }
+// Mobile Course Carousel Auto-Scroll
+window.addEventListener('load', () => {
+    const courseGrid = document.querySelector('.course-grid');
+    if (courseGrid) {
+        let courseInterval;
 
-        clearInterval(courseInterval);
-        courseInterval = setInterval(() => {
-            // Check if we are near the end
-            if (courseGrid.scrollLeft + courseGrid.clientWidth >= courseGrid.scrollWidth - 50) {
-                courseGrid.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                const card = courseGrid.querySelector('.course-card');
-                if (card) {
-                    const cardWidth = card.offsetWidth;
-                    const gap = 20; // Match CSS gap
-                    courseGrid.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
-                }
+        const startCourseAutoScroll = () => {
+            // Only active on mobile
+            if (window.innerWidth > 768) {
+                clearInterval(courseInterval);
+                return;
             }
-        }, 3000);
-    };
 
-    const stopCourseAutoScroll = () => clearInterval(courseInterval);
+            clearInterval(courseInterval);
+            courseInterval = setInterval(() => {
+                const card = courseGrid.querySelector('.course-card');
+                if (!card) return;
 
-    // Initial Start
-    startCourseAutoScroll();
+                const cardWidth = card.offsetWidth;
+                const gap = 20; // 20px gap from CSS
+                const itemWidth = cardWidth + gap;
 
-    // Handle Resize
-    window.addEventListener('resize', startCourseAutoScroll);
+                // Current Card Index
+                const currentIndex = Math.round(courseGrid.scrollLeft / itemWidth);
+                const nextIndex = currentIndex + 1;
+                const totalCards = courseGrid.querySelectorAll('.course-card').length;
 
-    // Pause on Interaction
-    courseGrid.addEventListener('touchstart', stopCourseAutoScroll, { passive: true });
-    courseGrid.addEventListener('touchend', () => {
-        setTimeout(startCourseAutoScroll, 3000); // Resume after delay
-    });
-}
+                // Check if we reached the last card (or beyond)
+                if (nextIndex >= totalCards) {
+                    courseGrid.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    courseGrid.scrollTo({ left: nextIndex * itemWidth, behavior: 'smooth' });
+                }
+            }, 3000);
+        };
+
+        const stopCourseAutoScroll = () => clearInterval(courseInterval);
+
+        // Initial Start
+        startCourseAutoScroll();
+
+        // Handle Resize
+        window.addEventListener('resize', startCourseAutoScroll);
+
+        // Pause on Interaction
+        courseGrid.addEventListener('touchstart', stopCourseAutoScroll, { passive: true });
+        courseGrid.addEventListener('touchend', () => {
+            // Ensure the user has finished their gesture before restarting
+            setTimeout(startCourseAutoScroll, 4000);
+        });
+
+        // Also pause on mouse interaction (desktop dev testing)
+        courseGrid.addEventListener('mouseenter', stopCourseAutoScroll);
+        courseGrid.addEventListener('mouseleave', startCourseAutoScroll);
+    }
+});
