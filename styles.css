@@ -1649,6 +1649,10 @@ h2 {
     max-width: 100% !important;
     display: block !important;
     margin-bottom: 15px;
+    overflow: hidden;
+    /* Clip any overflowing content (Safe now dropdown is in body) */
+    border-radius: 6px;
+    /* Match input radius */
 }
 
 .iti input {

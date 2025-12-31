@@ -521,6 +521,7 @@ if (popupPhone) {
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
         preferredCountries: ["in", "ae", "us", "uk"],
         autoPlaceholder: "off",
+        dropdownContainer: document.body, // Fix layout clipping/overflow issues
     });
 }
 
