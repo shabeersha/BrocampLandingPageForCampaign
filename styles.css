@@ -2608,7 +2608,7 @@ h2 {
     background-color: #ffffff;
     width: 70px;
     height: 70px;
-    border-radius: 24px;
+    border-radius: 50%;
     /* Reduced radius from 50% */
     z-index: 1000;
     display: flex;
@@ -2624,7 +2624,7 @@ h2 {
     height: 100%;
     object-fit: contain;
     /* Ensure logo fits within the circle nicely */
-    border-radius: 24px;
+    border-radius: 50%;
     /* Match parent */
     /* Clip image if needed */
 }
