@@ -1624,13 +1624,18 @@ h2 {
     border-color: #aaa;
 }
 
+/* Fix Layout for Intl Tel Input Container */
+.iti {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
 /* Fix Autofill for Light Popup */
 .form-group-new input:-webkit-autofill,
 .form-group-new input:-webkit-autofill:hover,
 .form-group-new input:-webkit-autofill:focus,
 .form-group-new input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-    /* Increased to ensure coverage */
+    -webkit-box-shadow: 0 0 0 100px #ffffff inset !important;
     -webkit-text-fill-color: #333333 !important;
     transition: background-color 5000s ease-in-out 0s;
     caret-color: #333333;
