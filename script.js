@@ -25,7 +25,7 @@ if (btnIT && btnNonIT && statsNumber && statsLabel) {
         btnNonIT.classList.remove('active');
 
         // Update stats content
-        statsNumber.innerText = "1052 Students";
+        statsNumber.innerText = "664 Students";
         statsLabel.innerText = "With IT background Have Already Placed From Brocamp";
 
         // Trigger Confetti from stats card position
@@ -38,7 +38,7 @@ if (btnIT && btnNonIT && statsNumber && statsLabel) {
         btnIT.classList.remove('active');
 
         // Update stats content
-        statsNumber.innerText = "1327 Students";
+        statsNumber.innerText = "1612 Students";
         statsLabel.innerText = "With Non-IT background Have Already Placed From Brocamp";
 
         // Trigger Confetti from stats card position
