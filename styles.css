@@ -218,8 +218,6 @@ ul {
     width: 100%;
     height: auto;
     object-fit: contain;
-    aspect-ratio: 3/2;
-    /* Prevents CLS */
     display: block;
 }
 
