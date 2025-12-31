@@ -1645,8 +1645,15 @@ h2 {
 
 /* Fix Layout for Intl Tel Input Container */
 .iti {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
     margin-bottom: 15px;
+}
+
+.iti input {
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 /* Fix Autofill for Light Popup */
