@@ -1638,6 +1638,8 @@ h2 {
     background: #fff;
     outline: none;
     font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .form-group-new input:focus,
