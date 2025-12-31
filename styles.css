@@ -583,6 +583,11 @@ ul {
     transition: color 0.3s;
 }
 
+/* Style Select Placeholder (Default Option) */
+.form-group select:invalid {
+    color: rgba(255, 255, 255, 0.4);
+}
+
 .form-group input:focus::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
