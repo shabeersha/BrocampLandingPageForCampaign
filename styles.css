@@ -1646,15 +1646,15 @@ h2 {
 }
 
 /* Fix Layout for Intl Tel Input Container */
-.iti:not(.iti--container) {
+.iti {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 0;
+    /* Allow shrinking */
     display: block !important;
     margin-bottom: 15px;
-    overflow: hidden;
-    /* Clip any overflowing content (Safe now dropdown is in body) */
     border-radius: 6px;
-    /* Match input radius */
+    /* overflow: visible;  Ensure dropdown shows */
 }
 
 .iti input {
