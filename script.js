@@ -170,6 +170,7 @@ if (leadForm) {
         // The form directly submits these fields.
 
         // 3. Submit to Zoho Iframe
+        if (leadForm.querySelector('[name="aG9uZXlwb3Q"]').value !== '') return;
         leadForm.submit();
 
 
@@ -565,6 +566,7 @@ if (popupForm) {
         }
 
         // Submit to Zoho Iframe
+        if (popupForm.querySelector('[name="aG9uZXlwb3Q"]').value !== '') return;
         popupForm.submit();
 
 
