@@ -2606,32 +2606,28 @@ h2 {
     bottom: 30px;
     right: 30px;
     background-color: transparent;
-    color: #25D366;
     width: 60px;
     height: 60px;
-    /* Removed border-radius and background */
-    text-align: center;
-    font-size: 60px;
-    /* Icon size */
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
     text-decoration: none;
-    /* Drop shadow on the icon itself */
     filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
 }
 
-.whatsapp-float svg {
+.whatsapp-float img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    /* Ensure image fills usage */
 }
+
+/* Remove SVG specific styles if present, or override */
 
 .whatsapp-float:hover {
     transform: scale(1.1);
-    color: #1eac52;
-    background-color: transparent;
 }
 
 /* Mobile Adjustment */
@@ -2641,10 +2637,5 @@ h2 {
         height: 50px;
         bottom: 20px;
         right: 20px;
-    }
-
-    .whatsapp-float svg {
-        width: 28px;
-        height: 28px;
     }
 }
