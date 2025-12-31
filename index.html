@@ -152,20 +152,22 @@
 
                     <div class="form-row" style="display: flex; gap: 10px;">
                         <div class="form-group" style="flex: 1;">
-                            <input type="text" placeholder="First Name" name="First Name" required>
+                            <input type="text" placeholder="First Name" name="First Name" required
+                                aria-label="First Name">
                         </div>
                         <div class="form-group" style="flex: 1;">
-                            <input type="text" placeholder="Last Name" name="Last Name" required>
+                            <input type="text" placeholder="Last Name" name="Last Name" required aria-label="Last Name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="tel" placeholder="Contact Number" name="Phone" id="phone" required>
+                        <input type="tel" placeholder="Contact Number" name="Phone" id="phone" required
+                            aria-label="Contact Number">
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Email" name="Email" id="email" required>
+                        <input type="email" placeholder="Email" name="Email" id="email" required aria-label="Email">
                     </div>
                     <div class="form-group">
-                        <select name="LEADCF5" id="background" required>
+                        <select name="LEADCF5" id="background" required aria-label="Employment Status">
                             <option value="" disabled selected>Employment Status</option>
                             <option value="Student">Student</option>
                             <option value="Fresher">Fresher</option>
@@ -173,7 +175,6 @@
                         </select>
                     </div>
                     <button type="submit" class="btn-primary btn-submit">Talk To Our Career Expert</button>
-                </form>
                 </form>
             </div>
         </div>
@@ -638,30 +639,30 @@
                 <input type="text" style="display:none;" name="LEADCF16" value="newlandingpage">
                 <input type="text" style="display:none;" name="aG9uZXlwb3Q" value="">
 
-                <div class="form-row">
-                    <div class="form-group-new half">
-                        <label>First Name</label>
-                        <input type="text" name="First Name" required>
+                <div class="form-row-new">
+                    <div class="form-group-new">
+                        <label for="popFN">First Name</label>
+                        <input type="text" name="First Name" id="popFN" required>
                     </div>
-                    <div class="form-group-new half">
-                        <label>Last Name</label>
-                        <input type="text" name="Last Name" required>
+                    <div class="form-group-new">
+                        <label for="popLN">Last Name</label>
+                        <input type="text" name="Last Name" id="popLN" required>
                     </div>
                 </div>
 
                 <div class="form-group-new">
-                    <label>Email</label>
-                    <input type="email" name="Email" required>
+                    <label for="popEmail">Email</label>
+                    <input type="email" name="Email" id="popEmail" required>
                 </div>
 
                 <div class="form-group-new">
-                    <label>Contact Number</label>
+                    <label for="popupPhoneNew">Contact Number</label>
                     <input type="tel" name="Phone" id="popupPhoneNew" required>
                 </div>
 
                 <div class="form-group-new">
-                    <label>Employment Status</label>
-                    <select name="LEADCF5" required>
+                    <label for="popStatus">Employment Status</label>
+                    <select name="LEADCF5" id="popStatus" required>
                         <option value="" disabled selected></option>
                         <option value="Student">Student</option>
                         <option value="Fresher">Fresher</option>
@@ -670,8 +671,8 @@
                 </div>
 
                 <div class="form-group-new">
-                    <label>Language</label>
-                    <select name="LEADCF33" required>
+                    <label for="popLang">Language</label>
+                    <select name="LEADCF33" id="popLang" required>
                         <option value="" disabled selected></option>
                         <option value="malayalam">Malayalam</option>
                         <option value="tamil">Tamil</option>
