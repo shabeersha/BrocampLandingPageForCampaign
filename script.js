@@ -1,4 +1,4 @@
-console.log("Brototype Landing Page Loaded");
+
 
 // Mobile Menu Placeholder
 const hamburger = document.querySelector('.hamburger');
