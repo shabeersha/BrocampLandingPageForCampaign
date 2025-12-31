@@ -552,7 +552,8 @@ ul {
 .form-group select {
     width: 100%;
     padding: 16px 0;
-    background: transparent;
+    background: transparent !important;
+    /* Force transparent */
     border: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 0;
