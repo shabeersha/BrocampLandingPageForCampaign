@@ -2644,4 +2644,8 @@ h2 {
         bottom: 20px;
         right: 20px;
     }
+
+    .whatsapp-float img {
+        filter: brightness(0) invert(1) !important;
+    }
 }
