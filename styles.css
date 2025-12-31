@@ -1646,7 +1646,7 @@ h2 {
 }
 
 /* Fix Layout for Intl Tel Input Container */
-.iti {
+.iti:not(.iti--container) {
     width: 100% !important;
     max-width: 100% !important;
     display: block !important;
