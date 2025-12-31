@@ -422,8 +422,10 @@ ul {
 
 /* Dynamic Stats Card - Pixel Perfect */
 /* Dynamic Stats Card - Pixel Perfect & Unified */
+/* Dynamic Stats Card - Pixel Perfect & Unified */
 .stats-card {
     margin-top: 15px;
+    width: 100%;
     /* Max width matched with hero button (500px) */
     max-width: 500px;
 
