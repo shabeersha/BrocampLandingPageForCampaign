@@ -645,6 +645,8 @@ input:-webkit-autofill:active {
 .iti__country-list {
     background-color: #0f1113 !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    z-index: 9999 !important;
+    /* Ensure visibility over modals */
     scrollbar-width: none;
     /* Firefox */
     -ms-overflow-style: none;
