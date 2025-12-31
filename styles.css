@@ -1537,6 +1537,9 @@ h2 {
     opacity: 0;
     transition: all 0.3s ease;
     text-align: left;
+    backface-visibility: hidden;
+    /* Prevent rendering artifacts */
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .popup-modal.show .popup-content-new {
@@ -1626,7 +1629,8 @@ h2 {
 .form-group-new input:-webkit-autofill:hover,
 .form-group-new input:-webkit-autofill:focus,
 .form-group-new input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    /* Increased to ensure coverage */
     -webkit-text-fill-color: #333333 !important;
     transition: background-color 5000s ease-in-out 0s;
     caret-color: #333333;
