@@ -2605,9 +2605,10 @@ h2 {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: transparent;
+    background-color: #ffffff;
     width: 70px;
     height: 70px;
+    border-radius: 50%;
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -2620,8 +2621,10 @@ h2 {
 .whatsapp-float img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    /* Ensure image fills usage */
+    object-fit: contain;
+    /* Ensure logo fits within the circle nicely */
+    border-radius: 50%;
+    /* Clip image if needed */
 }
 
 /* Remove SVG specific styles if present, or override */
