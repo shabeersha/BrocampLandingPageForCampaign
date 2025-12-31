@@ -2626,7 +2626,8 @@ h2 {
     /* Ensure logo fits within the circle nicely */
     border-radius: 50%;
     /* Match parent */
-    /* Clip image if needed */
+    filter: brightness(0) invert(1);
+    /* Force the logo to be white for contrast on green bg */
 }
 
 /* Remove SVG specific styles if present, or override */
