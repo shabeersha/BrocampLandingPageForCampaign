@@ -2647,17 +2647,6 @@ h2 {
     filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
 }
 
-.whatsapp-float img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    /* Ensure logo fits within the circle nicely */
-    border-radius: 50%;
-    /* Match parent */
-    filter: brightness(0) invert(1);
-    /* Force the logo to be white for contrast on green bg */
-}
-
 /* Remove SVG specific styles if present, or override */
 
 .whatsapp-float:hover {
@@ -2671,9 +2660,5 @@ h2 {
         height: 50px;
         bottom: 20px;
         right: 20px;
-    }
-
-    .whatsapp-float img {
-        filter: brightness(0) invert(1) !important;
     }
 }
