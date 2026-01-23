@@ -74,11 +74,12 @@
     </div>
     <main class="max-w-[1200px] mx-auto px-6 lg:px-20">
         <!-- Hero Section -->
-        <section class="flex flex-col lg:flex-row gap-12 pt-32 pb-16 lg:py-24 items-start">
+        <section class="flex flex-col lg:flex-row gap-6 lg:gap-12 pt-28 lg:pt-32 pb-16 lg:py-24 items-start">
             <!-- Left Column (55%) -->
-            <div class="w-full lg:w-[55%] flex flex-col gap-8">
-                <div class="flex flex-col gap-6">
-                    <h1 class="text-primary text-5xl lg:text-7xl font-black leading-[1.1] tracking-tight">
+            <div class="w-full lg:w-[55%] flex flex-col gap-5 lg:gap-8">
+                <div class="flex flex-col gap-4 lg:gap-6">
+                    <h1
+                        class="text-center lg:text-left text-primary text-4xl lg:text-7xl font-black leading-[1.1] tracking-tight">
                         Get Free Career Guidance
                         <span
                             class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-primary align-middle ml-2 align-super transform translate-y-2">
@@ -91,13 +92,21 @@
                 </div>
                 <!-- Abstract Visual Element -->
                 <div
-                    class="hidden lg:block w-full rounded-xl bg-gradient-to-br from-primary/10 via-background-dark to-cyan-accent/5 border border-white/5 relative overflow-hidden">
-                    <img src="Assets/Images/free-carrier-guidence-landing-page.webp" alt="" srcset="">
+                    class="block w-full max-w-sm mx-auto lg:max-w-none rounded-xl bg-gradient-to-br from-primary/10 via-background-dark to-cyan-accent/5 border border-white/5 relative overflow-hidden shrink-0">
+                    <img src="Assets/Images/free-carrier-guidence-landing-page.webp" alt="" class="w-full h-auto">
                 </div>
+
+                <!-- Mobile CTA -->
+                <a href="#lead-form"
+                    class="lg:hidden w-full yellow-gradient h-14 rounded-xl text-black font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group">
+                    <span>Get Started</span>
+                    <span
+                        class="material-symbols-outlined font-bold transition-transform group-hover:translate-x-1">arrow_downward</span>
+                </a>
 
             </div>
             <!-- Right Column (45%) Sticky Form -->
-            <div class="w-full lg:w-[45%] lg:sticky lg:top-32">
+            <div class="w-full lg:w-[45%] lg:sticky lg:top-32" id="lead-form">
                 <div class="glass-card p-8 rounded-2xl shadow-2xl relative overflow-hidden">
                     <!-- Subtle glow effect -->
                     <div class="absolute -top-24 -right-24 size-48 bg-cyan-accent blur-[100px] opacity-20"></div>
@@ -108,7 +117,7 @@
                     <iframe name="hidden_frame" id="hidden_frame" style="display:none;"></iframe>
                     <form action='https://crm.zoho.in/crm/WebToLeadForm' name=WebToLeads396465000177527021 method='POST'
                         class="flex flex-col gap-5" target="hidden_frame"
-                        onsubmit="setTimeout(function(){document.getElementById('thankYouModal').classList.remove('hidden'); document.getElementById('thankYouModal').classList.add('flex');}, 500);">
+                        onsubmit="splitName(); setTimeout(function(){document.getElementById('thankYouModal').classList.remove('hidden'); document.getElementById('thankYouModal').classList.add('flex');}, 500);">
 
                         <!-- Zoho Hidden Fields -->
                         <input type='text' style='display:none;' name='xnQsjsdp'
@@ -117,30 +126,43 @@
                         <input type='text' style='display:none;' name='xmIwtLD'
                             value='4da53946fa7358af5012b1a18abaa8f8ea5f5347d94123ab26174136008e358f7f5ed32cf1418224dc7c79105d7a9bf2'>
                         <input type='text' style='display:none;' name='actionType' value='TGVhZHM='>
-                        <input type='text' style='display:none;' name='returnURL'
-                            value='https://join.brototype.com'>
+                        <input type='text' style='display:none;' name='returnURL' value='https://join.brototype.com'>
 
                         <!-- Fixed Hidden Values from Source -->
                         <input type="hidden" name="Lead Source" value="Website Paid Leads Malayalam">
                         <input type="hidden" name="LEADCF14" value="Website Paid Leads Malayalam">
 
-                        <!-- Split Name Fields -->
-                        <div class="flex gap-4">
-                            <div class="flex flex-col gap-2 w-1/2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">First Name
-                                    <span class="text-red-500">*</span></label>
-                                <input required name="First Name"
-                                    class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                    placeholder="John" type="text" />
-                            </div>
-                            <div class="flex flex-col gap-2 w-1/2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Last Name
-                                    <span class="text-red-500">*</span></label>
-                                <input required name="Last Name"
-                                    class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                    placeholder="Doe" type="text" />
-                            </div>
+                        <!-- Combined Name Field -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Name
+                                <span class="text-red-500">*</span></label>
+                            <input required id="visibleName"
+                                class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
+                                placeholder="John Doe" type="text" />
                         </div>
+
+                        <!-- Hidden Real Fields for Zoho -->
+                        <input type="hidden" name="First Name" id="realFirstName">
+                        <input type="hidden" name="Last Name" id="realLastName" value="NULL">
+
+                        <script>
+                            function splitName() {
+                                const visibleField = document.getElementById('visibleName');
+                                const firstNameInput = document.getElementById('realFirstName');
+                                const lastNameInput = document.getElementById('realLastName');
+
+                                const fullName = visibleField.value.trim();
+                                const firstSpaceIndex = fullName.indexOf(' ');
+
+                                if (firstSpaceIndex > 0) {
+                                    firstNameInput.value = fullName.substring(0, firstSpaceIndex);
+                                    lastNameInput.value = fullName.substring(firstSpaceIndex + 1);
+                                } else {
+                                    firstNameInput.value = fullName;
+                                    lastNameInput.value = 'NULL';
+                                }
+                            }
+                        </script>
 
                         <div class="flex flex-col gap-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Email
@@ -165,20 +187,16 @@
                                 Status</label>
                             <select name="LEADCF5"
                                 class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white focus:border-cyan-accent focus:ring-0 transition-all [&>option]:bg-[#0F1419]">
-                                <option value='-None-' disabled selected>-None-</option>
+                                <option value='' disabled selected>Choose Option</option>
                                 <option value='Student'>Student</option>
                                 <option value='Fresher'>Fresher</option>
                                 <option value='Employed'>Employed</option>
                             </select>
                         </div>
 
-                        <div class="flex flex-col gap-2">
-                            <label
-                                class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Language</label>
-                            <input name="LEADCF33" style='display:none;'
-                                class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                placeholder="Preferred Language" type="text" value="Malayalam"/>
-                        </div>
+                        <input name="LEADCF33" style='display:none;'
+                            class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
+                            placeholder="Preferred Language" type="text" value="Malayalam" />
 
                         <button
                             class="yellow-gradient mt-4 w-full h-16 rounded-xl text-black font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group"
@@ -237,7 +255,7 @@
                     </div>
                     <h4 class="text-xl font-bold mb-3">Career Insights</h4>
                     <p class="text-gray-400 leading-relaxed">Stay ahead with the latest trends, salary benchmarks, and
-                        high-demand roles in the Indian tech market.</p>
+                        high-demand roles in the Global tech market.</p>
                 </div>
                 <!-- Card 3 -->
                 <div
