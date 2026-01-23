@@ -39,6 +39,25 @@
             },
         }
     </script>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '24870027019336969');
+        fbq('track', 'PageView-Free_Career_Guidance');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=24870027019336969&ev=PageView-Free_Career_Guidance&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
     <style>
         body {
             font-family: 'Manrope', sans-serif;
@@ -131,6 +150,28 @@
                         <!-- Fixed Hidden Values from Source -->
                         <input type="hidden" name="Lead Source" value="Website Paid Leads Malayalam">
                         <input type="hidden" name="LEADCF14" value="Website Paid Leads Malayalam">
+
+                        <!-- UTM Parameters (Defaults) -->
+                        <input type="hidden" name="utm_source">
+                        <input type="hidden" name="utm_medium">
+                        <input type="hidden" name="utm_campaign">
+                        <input type="hidden" name="utm_content">
+                        <input type="hidden" name="utm_term">
+                        <input type="hidden" name="ref">
+
+                        <script>
+                            // Populate UTM fields from URL if present
+                            (function () {
+                                const params = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref'];
+                                const urlParams = new URLSearchParams(window.location.search);
+                                params.forEach(param => {
+                                    if (urlParams.has(param)) {
+                                        const field = document.getElementsByName(param)[0];
+                                        if (field) field.value = urlParams.get(param);
+                                    }
+                                });
+                            })();
+                        </script>
 
                         <!-- Combined Name Field -->
                         <div class="flex flex-col gap-2">
