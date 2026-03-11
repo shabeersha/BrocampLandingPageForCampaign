@@ -138,7 +138,7 @@
                         action='https://forms.zohopublic.in/brototype/form/FreeCareerGuidancemeta/formperma/N7QVdy3xpWFYngNZrQodkMJwq3ynfrA_v8rQuOmCdjg/htmlRecords/submit'
                         name='form' id='form' method='POST' accept-charset='UTF-8' enctype='multipart/form-data'
                         class="flex flex-col gap-5" target="hidden_frame"
-                        onsubmit="fbq('track', 'Lead'); splitPhone(); setTimeout(function(){document.getElementById('thankYouModal').classList.remove('hidden'); document.getElementById('thankYouModal').classList.add('flex'); document.getElementById('form').reset();}, 500);">
+                        onsubmit="handleSubmit(event);">
 
                         <!-- Old Hidden Fields -->
                         <input type="hidden" name="Lead Source" value="Website Paid Leads Malayalam">
@@ -329,6 +329,50 @@
                 }
             });
         })();
+
+        async function handleSubmit(event) {
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Prepare SL payload
+            const payload = {
+                "form_id": "Free-Career-Guidance-Static-Landing-Page",
+                "form_name": "Free Career Guidance Static Landing Page",
+                "lead_details": {
+                    "first_name": formData.get('Name_First'),
+                    "last_name": formData.get('Name_Last'),
+                    "email": formData.get('Email'),
+                    "phone_number": "91 " + document.getElementById('visiblePhone').value,
+                    "employment_status": formData.get('Dropdown'),
+                    "language": "Malayalam"
+                },
+                "timestamp": new Date().toISOString()
+            };
+
+            // Send to SuperLeap
+            try {
+                fetch('https://v1hooks.superleap.com/3jZLLY/3jZLLY_H2sjFRx8xYIOrXhKIaoN', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload),
+                    mode: 'no-cors' // Use no-cors since we don't need the response and to avoid CORS issues if not configured
+                });
+            } catch (error) {
+                console.error('SuperLeap submission error:', error);
+            }
+
+            // Existing logic
+            fbq('track', 'Lead');
+            splitPhone();
+            
+            setTimeout(function(){
+                document.getElementById('thankYouModal').classList.remove('hidden'); 
+                document.getElementById('thankYouModal').classList.add('flex'); 
+                form.reset();
+            }, 500);
+        }
 
         function splitPhone() {
             const visiblePhone = document.getElementById('visiblePhone').value;
