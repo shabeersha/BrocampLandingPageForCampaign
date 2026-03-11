@@ -134,110 +134,94 @@
                         <span class="size-2 bg-primary rounded-full animate-pulse"></span>
                     </h3>
                     <iframe name="hidden_frame" id="hidden_frame" style="display:none;"></iframe>
-                    <form action='https://crm.zoho.in/crm/WebToLeadForm' name=WebToLeads396465000177527021 method='POST'
+                    <form
+                        action='https://forms.zohopublic.in/brototype/form/FreeCareerGuidancemeta/formperma/N7QVdy3xpWFYngNZrQodkMJwq3ynfrA_v8rQuOmCdjg/htmlRecords/submit'
+                        name='form' id='form' method='POST' accept-charset='UTF-8' enctype='multipart/form-data'
                         class="flex flex-col gap-5" target="hidden_frame"
-                        onsubmit="fbq('track', 'Lead'); splitName(); setTimeout(function(){document.getElementById('thankYouModal').classList.remove('hidden'); document.getElementById('thankYouModal').classList.add('flex');}, 500);">
+                        onsubmit="fbq('track', 'Lead'); splitPhone(); setTimeout(function(){document.getElementById('thankYouModal').classList.remove('hidden'); document.getElementById('thankYouModal').classList.add('flex'); document.getElementById('form').reset();}, 500);">
 
-                        <!-- Zoho Hidden Fields -->
-                        <input type='text' style='display:none;' name='xnQsjsdp'
-                            value='76ef35433ab43f217c41f31f4bf39e62e20921fde1f16a55eac10413e2f645f9'>
-                        <input type='hidden' name='zc_gad' id='zc_gad' value=''>
-                        <input type='text' style='display:none;' name='xmIwtLD'
-                            value='4da53946fa7358af5012b1a18abaa8f8ea5f5347d94123ab26174136008e358f7f5ed32cf1418224dc7c79105d7a9bf2'>
-                        <input type='text' style='display:none;' name='actionType' value='TGVhZHM='>
-                        <input type='text' style='display:none;' name='returnURL' value='https://join.brototype.com'>
-
-                        <!-- Fixed Hidden Values from Source -->
+                        <!-- Old Hidden Fields -->
                         <input type="hidden" name="Lead Source" value="Website Paid Leads Malayalam">
                         <input type="hidden" name="LEADCF14" value="Website Paid Leads Malayalam">
+                        <input name="LEADCF33" style='display:none;' value="Malayalam" />
 
-                        <!-- UTM Parameters (Defaults) -->
-                        <input type="hidden" name="utm_source">
-                        <input type="hidden" name="utm_medium">
-                        <input type="hidden" name="utm_campaign">
-                        <input type="hidden" name="utm_content">
-                        <input type="hidden" name="utm_term">
-                        <input type="hidden" name="ref">
+                        <!-- New Hidden Fields -->
+                        <input type="hidden" name="zf_referrer_name" value="">
+                        <input type="hidden" name="zf_redirect_url" value="">
+                        <!-- Duplicate zc_gad removed -->
+                        <input type="hidden" name="utm_source" value="" />
+                        <input type="hidden" name="utm_medium" value="" />
+                        <input type="hidden" name="utm_campaign" value="" />
+                        <input type="hidden" name="utm_term" value="" />
+                        <input type="hidden" name="utm_content" value="" />
+                        <input type="hidden" name="utm_id" value="" />
+                        <input type="hidden" name="utm_adgroup" value="" />
+                        <input type="hidden" name="utm_matchtype" value="" />
+                        <input type="hidden" name="utm_audience" value="" />
+                        <input type="hidden" name="utm_adgroupid" value="" />
+                        <input type="hidden" name="ref" value="" />
+                        <input type="hidden" name="utm_network" value="" />
+                        <input type="hidden" name="utm_placement" value="" />
 
-                        <script>
-                            // Populate UTM fields from URL if present
-                            (function () {
-                                const params = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref'];
-                                const urlParams = new URLSearchParams(window.location.search);
-                                params.forEach(param => {
-                                    if (urlParams.has(param)) {
-                                        const field = document.getElementsByName(param)[0];
-                                        if (field) field.value = urlParams.get(param);
-                                    }
-                                });
-                            })();
-                        </script>
 
-                        <!-- Combined Name Field -->
-                        <div class="flex flex-col gap-2">
-                            <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Name
-                                <span class="text-red-500">*</span></label>
-                            <input required id="visibleName"
-                                class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                placeholder="John Doe" type="text" />
+
+                        <!-- Name Fields -->
+                        <div class="flex gap-4">
+                            <div class="flex flex-col gap-2 w-1/2">
+                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Name
+                                    <span class="text-red-500">*</span></label>
+                                <input required type="text" maxlength="255" name="Name_First" fieldType=7
+                                    class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
+                                    placeholder="First Name" />
+                            </div>
+                            <div class="flex flex-col gap-2 w-1/2">
+                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Last
+                                    Name</label>
+                                <input type="text" maxlength="255" name="Name_Last" fieldType=7
+                                    class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
+                                    placeholder="Last Name" />
+                            </div>
                         </div>
 
-                        <!-- Hidden Real Fields for Zoho -->
-                        <input type="hidden" name="First Name" id="realFirstName">
-                        <input type="hidden" name="Last Name" id="realLastName" value="NULL">
-
-                        <script>
-                            function splitName() {
-                                const visibleField = document.getElementById('visibleName');
-                                const firstNameInput = document.getElementById('realFirstName');
-                                const lastNameInput = document.getElementById('realLastName');
-
-                                const fullName = visibleField.value.trim();
-                                const firstSpaceIndex = fullName.indexOf(' ');
-
-                                if (firstSpaceIndex > 0) {
-                                    firstNameInput.value = fullName.substring(0, firstSpaceIndex);
-                                    lastNameInput.value = fullName.substring(firstSpaceIndex + 1);
-                                } else {
-                                    firstNameInput.value = fullName;
-                                    lastNameInput.value = 'NULL';
-                                }
-                            }
-                        </script>
-
+                        <!-- Email Field -->
                         <div class="flex flex-col gap-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Email
-                                Address <span class="text-red-500">*</span></label>
-                            <input required name="Email"
+                                <span class="text-red-500">*</span></label>
+                            <input required type="text" maxlength="255" name="Email" value="" fieldType=9
                                 class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                placeholder="john@example.com" type="email" />
+                                placeholder="john@example.com" />
                         </div>
+
+                        <!-- Phone Field -->
                         <div class="flex flex-col gap-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Phone
                                 Number <span class="text-red-500">*</span></label>
                             <div class="flex items-center">
                                 <span
                                     class="flex items-center justify-center h-14 px-4 bg-white/10 border border-white/10 border-r-0 rounded-l-lg text-gray-300 font-bold">+91</span>
-                                <input required name="Phone"
+                                <input required id="visiblePhone"
                                     class="flex-1 bg-white/5 border border-white/10 rounded-r-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
                                     placeholder="70343 95811" type="tel" />
                             </div>
                         </div>
+
+                        <!-- Hidden Real Phone Fields for Zoho -->
+                        <input type="hidden" name="PhoneNumber_countrycodeval" id="realCountryCode" value="+91">
+                        <input type="hidden" name="PhoneNumber_countrycode" id="realPhoneNumber">
+
+
+                        <!-- Employment Status -->
                         <div class="flex flex-col gap-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Employment
                                 Status</label>
-                            <select name="LEADCF5"
+                            <select name="Dropdown"
                                 class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white focus:border-cyan-accent focus:ring-0 transition-all [&>option]:bg-[#0F1419]">
-                                <option value='' disabled selected>Choose Option</option>
-                                <option value='Student'>Student</option>
-                                <option value='Fresher'>Fresher</option>
-                                <option value='Employed'>Employed</option>
+                                <option value="-Select-" disabled selected>-Select-</option>
+                                <option value="Student">Student</option>
+                                <option value="Fresher">Fresher</option>
+                                <option value="Employed">Employed</option>
                             </select>
                         </div>
-
-                        <input name="LEADCF33" style='display:none;'
-                            class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                            placeholder="Preferred Language" type="text" value="Malayalam" />
 
                         <button
                             class="yellow-gradient mt-4 w-full h-16 rounded-xl text-black font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group"
@@ -326,6 +310,33 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Populate UTM fields from URL if present
+        (function () {
+            const params = [
+                'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref',
+                'utm_id', 'utm_adgroup', 'utm_matchtype', 'utm_audience', 'utm_adgroupid',
+                'utm_network', 'utm_placement'
+            ];
+            const urlParams = new URLSearchParams(window.location.search);
+            params.forEach(param => {
+                if (urlParams.has(param)) {
+                    const fields = document.getElementsByName(param);
+                    for (let field of fields) {
+                        field.value = urlParams.get(param);
+                    }
+                }
+            });
+        })();
+
+        function splitPhone() {
+            const visiblePhone = document.getElementById('visiblePhone').value;
+            const realPhoneNumber = document.getElementById('realPhoneNumber');
+            // No need to set country code as it is fixed in hidden input
+            realPhoneNumber.value = visiblePhone;
+        }
+    </script>
 </body>
 
 </html>
