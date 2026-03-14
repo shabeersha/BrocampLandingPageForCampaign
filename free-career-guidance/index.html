@@ -138,7 +138,7 @@
                         action='https://forms.zohopublic.in/brototype/form/FreeCareerGuidancemeta/formperma/N7QVdy3xpWFYngNZrQodkMJwq3ynfrA_v8rQuOmCdjg/htmlRecords/submit'
                         name='form' id='form' method='POST' accept-charset='UTF-8' enctype='multipart/form-data'
                         class="flex flex-col gap-5" target="hidden_frame"
-                        onsubmit="fbq('track', 'Lead'); splitPhone(); setTimeout(function(){document.getElementById('thankYouModal').classList.remove('hidden'); document.getElementById('thankYouModal').classList.add('flex'); document.getElementById('form').reset();}, 500);">
+                        onsubmit="handleSubmit(event);">
 
                         <!-- Old Hidden Fields -->
                         <input type="hidden" name="Lead Source" value="Website Paid Leads Malayalam">
@@ -162,6 +162,9 @@
                         <input type="hidden" name="ref" value="" />
                         <input type="hidden" name="utm_network" value="" />
                         <input type="hidden" name="utm_placement" value="" />
+                        <input type="hidden" name="utm_device" value="" />
+                        <input type="hidden" name="utm_location" value="" />
+                        <input type="hidden" name="utm_campaignid" value="" />
 
 
 
@@ -317,7 +320,7 @@
             const params = [
                 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref',
                 'utm_id', 'utm_adgroup', 'utm_matchtype', 'utm_audience', 'utm_adgroupid',
-                'utm_network', 'utm_placement'
+                'utm_network', 'utm_placement', 'utm_device', 'utm_location', 'utm_campaignid'
             ];
             const urlParams = new URLSearchParams(window.location.search);
             params.forEach(param => {
@@ -329,6 +332,67 @@
                 }
             });
         })();
+
+        async function handleSubmit(event) {
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Prepare SL payload
+            const payload = {
+                "form_id": "Free-Career-Guidance-Static-Landing-Page",
+                "form_name": "Free Career Guidance Static Landing Page",
+                "lead_details": {
+                    "first_name": formData.get('Name_First'),
+                    "last_name": formData.get('Name_Last'),
+                    "email": formData.get('Email'),
+                    "phone_number": "91 " + document.getElementById('visiblePhone').value,
+                    "employment_status": formData.get('Dropdown'),
+                    "language": "Malayalam"
+                },
+                "marketing_details": {
+                    "utm_source": formData.get('utm_source'),
+                    "utm_medium": formData.get('utm_medium'),
+                    "utm_campaign": formData.get('utm_campaign'),
+                    "utm_term": formData.get('utm_term'),
+                    "utm_content": formData.get('utm_content'),
+                    "utm_network": formData.get('utm_network'),
+                    "utm_device": formData.get('utm_device'),
+                    "utm_location": formData.get('utm_location'),
+                    "utm_campaignid": formData.get('utm_campaignid'),
+                    "utm_adgroupid": formData.get('utm_adgroupid'),
+                    "utm_audience": formData.get('utm_audience'),
+                    "utm_placement": formData.get('utm_placement'),
+                    "utm_matchtype": formData.get('utm_matchtype'),
+                    "utm_adgroup": formData.get('utm_adgroup'),
+                    "ref": formData.get('ref')
+                },
+                "timestamp": new Date().toISOString()
+            };
+
+            // Send to SuperLeap
+            try {
+                fetch('https://v1hooks.superleap.com/3jZLLY/3jZLLY_H2sjFRx8xYIOrXhKIaoN', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload),
+                    mode: 'no-cors' // Use no-cors since we don't need the response and to avoid CORS issues if not configured
+                });
+            } catch (error) {
+                console.error('SuperLeap submission error:', error);
+            }
+
+            // Existing logic
+            fbq('track', 'Lead');
+            splitPhone();
+            
+            setTimeout(function(){
+                document.getElementById('thankYouModal').classList.remove('hidden'); 
+                document.getElementById('thankYouModal').classList.add('flex'); 
+                form.reset();
+            }, 500);
+        }
 
         function splitPhone() {
             const visiblePhone = document.getElementById('visiblePhone').value;
