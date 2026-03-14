@@ -162,6 +162,9 @@
                         <input type="hidden" name="ref" value="" />
                         <input type="hidden" name="utm_network" value="" />
                         <input type="hidden" name="utm_placement" value="" />
+                        <input type="hidden" name="utm_device" value="" />
+                        <input type="hidden" name="utm_location" value="" />
+                        <input type="hidden" name="utm_campaignid" value="" />
 
 
 
@@ -317,7 +320,7 @@
             const params = [
                 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref',
                 'utm_id', 'utm_adgroup', 'utm_matchtype', 'utm_audience', 'utm_adgroupid',
-                'utm_network', 'utm_placement'
+                'utm_network', 'utm_placement', 'utm_device', 'utm_location', 'utm_campaignid'
             ];
             const urlParams = new URLSearchParams(window.location.search);
             params.forEach(param => {
@@ -345,6 +348,23 @@
                     "phone_number": "91 " + document.getElementById('visiblePhone').value,
                     "employment_status": formData.get('Dropdown'),
                     "language": "Malayalam"
+                },
+                "marketing_details": {
+                    "utm_source": formData.get('utm_source'),
+                    "utm_medium": formData.get('utm_medium'),
+                    "utm_campaign": formData.get('utm_campaign'),
+                    "utm_term": formData.get('utm_term'),
+                    "utm_content": formData.get('utm_content'),
+                    "utm_network": formData.get('utm_network'),
+                    "utm_device": formData.get('utm_device'),
+                    "utm_location": formData.get('utm_location'),
+                    "utm_campaignid": formData.get('utm_campaignid'),
+                    "utm_adgroupid": formData.get('utm_adgroupid'),
+                    "utm_audience": formData.get('utm_audience'),
+                    "utm_placement": formData.get('utm_placement'),
+                    "utm_matchtype": formData.get('utm_matchtype'),
+                    "utm_adgroup": formData.get('utm_adgroup'),
+                    "ref": formData.get('ref')
                 },
                 "timestamp": new Date().toISOString()
             };
