@@ -55,8 +55,12 @@
     </script>
 
     <style>
+        html,
         body {
             font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
 
         .glass-card {
@@ -166,7 +170,7 @@
     <!-- Sticky Header -->
     <!-- Floating Floating Header -->
     <div
-        class="fixed top-6 left-1/2 -translate-x-1/2 z-50 glass-card rounded-full p-1.5 pr-2 flex items-center justify-between w-[92%] max-w-[450px] sm:w-auto gap-1 sm:gap-2 shadow-2xl border border-white/10 backdrop-blur-md bg-black/40">
+        class="fixed top-6 inset-x-0 mx-auto z-50 glass-card rounded-full p-1.5 pr-2 flex items-center justify-between w-[92%] max-w-[420px] sm:w-auto gap-1 sm:gap-2 shadow-2xl border border-white/10 backdrop-blur-md bg-black/40">
         <div class="flex items-center gap-2 pl-2 sm:pl-3">
             <img src="Assets/Images/Brototype-without-tagline-white-LOGO-SVG.svg" alt="Brototype"
                 class="h-9 sm:h-8 w-auto" fetchpriority="high">
@@ -185,13 +189,13 @@
             <div class="w-full lg:w-[55%] flex flex-col gap-5 lg:gap-8">
                 <div class="flex flex-col gap-4 lg:gap-6">
                     <h1
-                        class="text-center lg:text-left text-primary text-4xl lg:text-7xl font-black leading-[1.1] tracking-tight">
+                        class="text-center lg:text-left text-primary text-2xl sm:text-4xl lg:text-7xl font-black leading-[1.1] tracking-tight break-words">
                         Explore Opportunities in IT Field
                         <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-primary align-middle ml-2 align-super transform translate-y-2">
+                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-primary align-middle ml-0 sm:ml-2 mt-2 sm:mt-0 align-super transform translate-y-0 sm:translate-y-2">
 
-                            <span class="text-sm font-medium text-gray-200 tracking-normal">Completely free</span>
-                            <span class="material-symbols-outlined text-primary text-lg">verified</span>
+                            <span class="text-xs sm:text-sm font-medium text-gray-200 tracking-normal">Completely free</span>
+                            <span class="material-symbols-outlined text-primary text-base sm:text-lg">verified</span>
                         </span>
                     </h1>
 
@@ -214,10 +218,10 @@
             </div>
             <!-- Right Column (45%) Sticky Form -->
             <div class="w-full lg:w-[45%] lg:sticky lg:top-32" id="lead-form">
-                <div class="glass-card p-8 rounded-2xl shadow-2xl relative" id="lead-form-start">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl shadow-2xl relative overflow-hidden" id="lead-form-start">
                     <!-- Subtle glow effect (contained by outer relative) -->
                     <div
-                        class="absolute -top-24 -right-24 size-48 bg-cyan-accent blur-[100px] opacity-20 pointer-events-none rounded-full">
+                        class="hidden sm:block absolute -top-24 -right-24 size-48 bg-cyan-accent blur-[100px] opacity-20 pointer-events-none rounded-full">
                     </div>
                     <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
                         Book Your Call
