@@ -69,7 +69,7 @@
         .iti {
             width: 100%;
         }
-        
+
         .iti__country-list {
             background-color: #1A1F26 !important;
             color: #E5E7EB !important;
@@ -97,16 +97,19 @@
             background-color: rgba(255, 255, 255, 0.05) !important;
         }
 
-        .iti__country-name, .iti__dial-code {
+        .iti__country-name,
+        .iti__dial-code {
             color: #E5E7EB !important;
         }
 
         .iti input {
-            padding-left: 52px !important; /* Standard padding for flags */
+            padding-left: 52px !important;
+            /* Standard padding for flags */
         }
-        
+
         .iti--separate-dial-code input {
-            padding-left: 95px !important; /* More space for dial code */
+            padding-left: 95px !important;
+            /* More space for dial code */
         }
 
         .yellow-gradient {
@@ -136,6 +139,26 @@
         #visiblePhone::-webkit-outer-spin-button {
             -webkit-appearance: none;
         }
+
+        @media (max-width: 380px) {
+            .phone-full {
+                display: none !important;
+            }
+
+            .phone-compact {
+                display: inline !important;
+            }
+        }
+
+        @media (min-width: 381px) {
+            .phone-full {
+                display: inline !important;
+            }
+
+            .phone-compact {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -143,15 +166,16 @@
     <!-- Sticky Header -->
     <!-- Floating Floating Header -->
     <div
-        class="fixed top-6 left-1/2 -translate-x-1/2 z-50 glass-card rounded-full p-1.5 pr-2 flex items-center justify-between w-[90%] sm:w-auto gap-2 shadow-2xl border border-white/10 backdrop-blur-md bg-black/40">
-        <div class="flex items-center gap-2 pl-3">
+        class="fixed top-6 left-1/2 -translate-x-1/2 z-50 glass-card rounded-full p-1.5 pr-2 flex items-center justify-between w-[92%] max-w-[450px] sm:w-auto gap-1 sm:gap-2 shadow-2xl border border-white/10 backdrop-blur-md bg-black/40">
+        <div class="flex items-center gap-2 pl-2 sm:pl-3">
             <img src="Assets/Images/Brototype-without-tagline-white-LOGO-SVG.svg" alt="Brototype"
-                class="h-12 lg:h-8 w-auto" fetchpriority="high">
+                class="h-9 sm:h-8 w-auto" fetchpriority="high">
         </div>
-        <a class="flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors px-3 py-2 rounded-full border border-primary group"
+        <a class="flex items-center gap-1.5 sm:gap-2 bg-white/10 hover:bg-white/20 transition-colors px-2.5 sm:px-3 py-2 rounded-full border border-primary group"
             href="tel:+917034395811" aria-label="Call us directly at +91 70343 95811">
             <span class="material-symbols-outlined text-primary text-lg">phone_in_talk</span>
-            <span class="font-bold text-xs tracking-wide whitespace-nowrap">+91 7034395811</span>
+            <span class="phone-full font-bold text-xs tracking-wide whitespace-nowrap">+91 7034395811</span>
+            <span class="phone-compact font-bold text-[10px] tracking-wide whitespace-nowrap">Call now</span>
         </a>
     </div>
     <main class="max-w-[1200px] mx-auto px-6 lg:px-20">
@@ -162,7 +186,7 @@
                 <div class="flex flex-col gap-4 lg:gap-6">
                     <h1
                         class="text-center lg:text-left text-primary text-4xl lg:text-7xl font-black leading-[1.1] tracking-tight">
-                        Get Free Career Guidance
+                        Explore Opportunities in IT Field
                         <span
                             class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-primary align-middle ml-2 align-super transform translate-y-2">
 
@@ -182,7 +206,7 @@
                 <!-- Mobile CTA -->
                 <a href="#lead-form-start" aria-label="Skip to lead form to get started"
                     class="lg:hidden w-full yellow-gradient h-14 rounded-xl text-black font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group">
-                    <span>Get Free Guidance</span>
+                    <span>Book Expert Call Now</span>
                     <span
                         class="material-symbols-outlined font-bold transition-transform group-hover:translate-x-1">arrow_downward</span>
                 </a>
@@ -192,9 +216,11 @@
             <div class="w-full lg:w-[45%] lg:sticky lg:top-32" id="lead-form">
                 <div class="glass-card p-8 rounded-2xl shadow-2xl relative" id="lead-form-start">
                     <!-- Subtle glow effect (contained by outer relative) -->
-                    <div class="absolute -top-24 -right-24 size-48 bg-cyan-accent blur-[100px] opacity-20 pointer-events-none rounded-full"></div>
+                    <div
+                        class="absolute -top-24 -right-24 size-48 bg-cyan-accent blur-[100px] opacity-20 pointer-events-none rounded-full">
+                    </div>
                     <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
-                        Start Your Journey
+                        Book Your Call
                         <span class="size-2 bg-primary rounded-full animate-pulse"></span>
                     </h3>
                     <form name='form' id='form' class="flex flex-col gap-5" onsubmit="handleSubmit(event);">
@@ -257,7 +283,7 @@
                         <button id="submitBtn"
                             class="yellow-gradient mt-4 w-full h-16 rounded-xl text-black font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
                             type="submit">
-                            <span id="submitText">Get My Guidance</span>
+                            <span id="submitText">Book Call Now</span>
                             <span id="submitIcon"
                                 class="material-symbols-outlined font-bold transition-transform group-hover:translate-x-1">arrow_forward</span>
                         </button>
@@ -374,9 +400,9 @@
                 });
             }
         };
-        
+
         // Force initialization attempt repeatedly until success or 5s timeout
-        (function() {
+        (function () {
             let attempts = 0;
             const interval = setInterval(() => {
                 initializeITI();
@@ -416,7 +442,7 @@
             const phoneEl = document.getElementById('visiblePhone');
             phoneEl.classList.remove('field-error');
             document.getElementById('errPhone').classList.remove('visible');
-            
+
             if (!iti || (iti.isValidNumber && !iti.isValidNumber())) {
                 phoneEl.classList.add('field-error');
                 document.getElementById('errPhone').classList.add('visible');

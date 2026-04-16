@@ -104,6 +104,15 @@
         /* Digits-only phone field */
         #visiblePhone::-webkit-inner-spin-button,
         #visiblePhone::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+        @media (max-width: 380px) {
+            .phone-full { display: none !important; }
+            .phone-compact { display: inline !important; }
+        }
+        @media (min-width: 381px) {
+            .phone-full { display: inline !important; }
+            .phone-compact { display: none !important; }
+        }
     </style>
 </head>
 
@@ -111,15 +120,16 @@
     <!-- Sticky Header -->
     <!-- Floating Floating Header -->
     <div
-        class="fixed top-6 left-1/2 -translate-x-1/2 z-50 glass-card rounded-full p-1.5 pr-2 flex items-center justify-between w-[90%] sm:w-auto gap-2 shadow-2xl border border-white/10 backdrop-blur-md bg-black/40">
-        <div class="flex items-center gap-2 pl-3">
+        class="fixed top-6 left-1/2 -translate-x-1/2 z-50 glass-card rounded-full p-1.5 pr-2 flex items-center justify-between w-[92%] max-w-[450px] sm:w-auto gap-1 sm:gap-2 shadow-2xl border border-white/10 backdrop-blur-md bg-black/40">
+        <div class="flex items-center gap-2 pl-2 sm:pl-3">
             <img src="Assets/Images/Brototype-without-tagline-white-LOGO-SVG.svg" alt="Brototype"
-                class="h-12 lg:h-8 w-auto" fetchpriority="high">
+                class="h-9 sm:h-8 w-auto" fetchpriority="high">
         </div>
-        <a class="flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors px-3 py-2 rounded-full border border-primary group"
+        <a class="flex items-center gap-1.5 sm:gap-2 bg-white/10 hover:bg-white/20 transition-colors px-2.5 sm:px-3 py-2 rounded-full border border-primary group"
             href="tel:+917034395811" aria-label="Call us directly at +91 70343 95811">
             <span class="material-symbols-outlined text-primary text-lg">phone_in_talk</span>
-            <span class="font-bold text-xs tracking-wide whitespace-nowrap">+91 7034395811</span>
+            <span class="phone-full font-bold text-xs tracking-wide whitespace-nowrap">+91 7034395811</span>
+            <span class="phone-compact font-bold text-[10px] tracking-wide whitespace-nowrap">Call now</span>
         </a>
     </div>
     <main class="max-w-[1200px] mx-auto px-6 lg:px-20">
