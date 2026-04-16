@@ -6,11 +6,13 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Free Career Guidance | Brototype</title>
-    
+
     <!-- SEO & Open Graph Tags -->
-    <meta name="description" content="Get expert, personalized career guidance to help you navigate the tech industry. Free mentoring and assessment by Brototype." />
+    <meta name="description"
+        content="Get expert, personalized career guidance to help you navigate the tech industry. Free mentoring and assessment by Brototype." />
     <meta property="og:title" content="Free Career Guidance | Brototype" />
-    <meta property="og:description" content="Personalized assessment, career insights, and expert guidance. Start your journey into the tech market." />
+    <meta property="og:description"
+        content="Personalized assessment, career insights, and expert guidance. Start your journey into the tech market." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="Assets/Images/free-carrier-guidence-landing-page.webp" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -19,14 +21,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.tailwindcss.com" />
-    <link rel="preconnect" href="https://connect.facebook.net" />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -51,25 +53,7 @@
             },
         }
     </script>
-    <!-- Meta Pixel Code -->
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1258837906074179');
-        fbq('track', 'PageView-Free_Career_Guidance');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=1258837906074179&ev=PageView-Free_Career_Guidance&noscript=1" /></noscript>
-    <!-- End Meta Pixel Code -->
+
     <style>
         body {
             font-family: 'Manrope', sans-serif;
@@ -77,9 +61,52 @@
 
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid #00D9FF40;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* intl-tel-input dark mode overrides */
+        .iti {
+            width: 100%;
+        }
+        
+        .iti__country-list {
+            background-color: #1A1F26 !important;
+            color: #E5E7EB !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            z-index: 100 !important;
+        }
+
+        .iti__selected-dial-code {
+            color: #ffd900 !important;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .iti--separate-dial-code .iti__selected-flag {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .iti__country {
+            padding: 10px !important;
+            outline: none !important;
+        }
+
+        .iti__country:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .iti__country-name, .iti__dial-code {
+            color: #E5E7EB !important;
+        }
+
+        .iti input {
+            padding-left: 52px !important; /* Standard padding for flags */
+        }
+        
+        .iti--separate-dial-code input {
+            padding-left: 95px !important; /* More space for dial code */
         }
 
         .yellow-gradient {
@@ -90,6 +117,7 @@
         .field-error {
             border-color: #ef4444 !important;
         }
+
         .error-msg {
             display: none;
             color: #ef4444;
@@ -98,12 +126,16 @@
             margin-top: 2px;
             margin-left: 4px;
         }
+
         .error-msg.visible {
             display: block;
         }
+
         /* Digits-only phone field */
         #visiblePhone::-webkit-inner-spin-button,
-        #visiblePhone::-webkit-outer-spin-button { -webkit-appearance: none; }
+        #visiblePhone::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
     </style>
 </head>
 
@@ -143,13 +175,14 @@
                 <!-- Abstract Visual Element -->
                 <div
                     class="block w-full max-w-sm mx-auto lg:max-w-none rounded-xl bg-gradient-to-br from-primary/10 via-background-dark to-cyan-accent/5 border border-white/5 relative overflow-hidden shrink-0">
-                    <img src="Assets/Images/free-carrier-guidence-landing-page.webp" alt="Abstract visualization of free career guidance" class="w-full h-auto" fetchpriority="high">
+                    <img src="Assets/Images/free-carrier-guidence-landing-page.webp"
+                        alt="Abstract visualization of free career guidance" class="w-full h-auto" fetchpriority="high">
                 </div>
 
                 <!-- Mobile CTA -->
-                <a href="#lead-form" aria-label="Skip to lead form to get started"
+                <a href="#lead-form-start" aria-label="Skip to lead form to get started"
                     class="lg:hidden w-full yellow-gradient h-14 rounded-xl text-black font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group">
-                    <span>Get Started</span>
+                    <span>Get Free Guidance</span>
                     <span
                         class="material-symbols-outlined font-bold transition-transform group-hover:translate-x-1">arrow_downward</span>
                 </a>
@@ -157,29 +190,15 @@
             </div>
             <!-- Right Column (45%) Sticky Form -->
             <div class="w-full lg:w-[45%] lg:sticky lg:top-32" id="lead-form">
-                <div class="glass-card p-8 rounded-2xl shadow-2xl relative overflow-hidden">
-                    <!-- Subtle glow effect -->
-                    <div class="absolute -top-24 -right-24 size-48 bg-cyan-accent blur-[100px] opacity-20"></div>
+                <div class="glass-card p-8 rounded-2xl shadow-2xl relative" id="lead-form-start">
+                    <!-- Subtle glow effect (contained by outer relative) -->
+                    <div class="absolute -top-24 -right-24 size-48 bg-cyan-accent blur-[100px] opacity-20 pointer-events-none rounded-full"></div>
                     <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
                         Start Your Journey
                         <span class="size-2 bg-primary rounded-full animate-pulse"></span>
                     </h3>
-                    <iframe name="hidden_frame" id="hidden_frame" style="display:none;"></iframe>
-                    <form
-                        action='https://forms.zohopublic.in/brototype/form/FreeCareerGuidancemeta/formperma/N7QVdy3xpWFYngNZrQodkMJwq3ynfrA_v8rQuOmCdjg/htmlRecords/submit'
-                        name='form' id='form' method='POST' accept-charset='UTF-8' enctype='multipart/form-data'
-                        class="flex flex-col gap-5" target="hidden_frame"
-                        onsubmit="handleSubmit(event);">
+                    <form name='form' id='form' class="flex flex-col gap-5" onsubmit="handleSubmit(event);">
 
-                        <!-- Old Hidden Fields -->
-                        <input type="hidden" name="Lead Source" value="Website Paid Leads Malayalam">
-                        <input type="hidden" name="LEADCF14" value="Website Paid Leads Malayalam">
-                        <input name="LEADCF33" style='display:none;' value="Malayalam" />
-
-                        <!-- New Hidden Fields -->
-                        <input type="hidden" name="zf_referrer_name" value="">
-                        <input type="hidden" name="zf_redirect_url" value="">
-                        <!-- Duplicate zc_gad removed -->
                         <input type="hidden" name="utm_source" value="" />
                         <input type="hidden" name="utm_medium" value="" />
                         <input type="hidden" name="utm_campaign" value="" />
@@ -199,74 +218,47 @@
 
 
 
-                        <!-- Name Fields -->
-                        <div class="flex gap-4">
-                            <div class="flex flex-col gap-2 w-1/2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Name
-                                    <span class="text-red-500">*</span></label>
-                                <input type="text" maxlength="255" name="Name_First" id="fieldFirstName" fieldType=7
-                                    class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                    placeholder="First Name" />
-                                <span class="error-msg" id="errFirstName">First name is required.</span>
-                            </div>
-                            <div class="flex flex-col gap-2 w-1/2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Last
-                                    Name <span class="text-red-500">*</span></label>
-                                <input type="text" maxlength="255" name="Name_Last" id="fieldLastName" fieldType=7
-                                    class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                    placeholder="Last Name" />
-                                <span class="error-msg" id="errLastName">Last name is required.</span>
-                            </div>
-                        </div>
-
-                        <!-- Email Field -->
+                        <!-- Name Field -->
                         <div class="flex flex-col gap-2">
-                            <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Email
+                            <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Name
                                 <span class="text-red-500">*</span></label>
-                            <input type="text" maxlength="255" name="Email" id="fieldEmail" value="" fieldType=9
+                            <input type="text" maxlength="255" name="Name" id="fieldName"
                                 class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                placeholder="john@example.com" />
-                            <span class="error-msg" id="errEmail">Please enter a valid email address.</span>
+                                placeholder="Full Name" />
+                            <span class="error-msg" id="errName">Name is required.</span>
                         </div>
 
                         <!-- Phone Field -->
                         <div class="flex flex-col gap-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Phone
                                 Number <span class="text-red-500">*</span></label>
-                            <div class="flex items-center">
-                                <span
-                                    class="flex items-center justify-center h-14 px-4 bg-white/10 border border-white/10 border-r-0 rounded-l-lg text-gray-300 font-bold">+91</span>
-                                <input id="visiblePhone"
-                                    class="flex-1 bg-white/5 border border-white/10 rounded-r-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
-                                    placeholder="70343 95811" type="text" inputmode="numeric" maxlength="10" />
-                            </div>
-                            <span class="error-msg" id="errPhone">Please enter a valid 10-digit phone number.</span>
+                            <input id="visiblePhone" type="tel"
+                                class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white placeholder:text-gray-600 focus:border-cyan-accent focus:ring-0 transition-all"
+                                placeholder="70343 95811" />
+                            <span class="error-msg" id="errPhone">Please enter a valid phone number.</span>
                         </div>
 
-                        <!-- Hidden Real Phone Fields for Zoho -->
-                        <input type="hidden" name="PhoneNumber_countrycodeval" id="realCountryCode" value="+91">
-                        <input type="hidden" name="PhoneNumber_countrycode" id="realPhoneNumber">
-
-
-                        <!-- Employment Status -->
+                        <!-- Current Status -->
                         <div class="flex flex-col gap-2">
-                            <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Employment
+                            <label class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Current
                                 Status <span class="text-red-500">*</span></label>
-                            <select name="Dropdown" id="fieldDropdown"
+                            <select name="Current_Status" id="fieldDropdown"
                                 class="w-full bg-white/5 border border-white/10 rounded-lg h-14 px-4 text-white focus:border-cyan-accent focus:ring-0 transition-all [&>option]:bg-[#0F1419]">
                                 <option value="" disabled selected>-Select-</option>
-                                <option value="Student">Student</option>
-                                <option value="Fresher">Fresher</option>
-                                <option value="Employed">Employed</option>
+                                <option value="+2">+2</option>
+                                <option value="UG">UG</option>
+                                <option value="PG">PG</option>
+                                <option value="Working">Working</option>
+                                <option value="Other">Other</option>
                             </select>
-                            <span class="error-msg" id="errDropdown">Please select your employment status.</span>
+                            <span class="error-msg" id="errDropdown">Please select your current status.</span>
                         </div>
 
-                        <button
-                            class="yellow-gradient mt-4 w-full h-16 rounded-xl text-black font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group"
+                        <button id="submitBtn"
+                            class="yellow-gradient mt-4 w-full h-16 rounded-xl text-black font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
                             type="submit">
-                            <span>Get My Guidance</span>
-                            <span
+                            <span id="submitText">Get My Guidance</span>
+                            <span id="submitIcon"
                                 class="material-symbols-outlined font-bold transition-transform group-hover:translate-x-1">arrow_forward</span>
                         </button>
                         <p class="text-[10px] text-center text-gray-500 mt-2 uppercase tracking-tighter">
@@ -339,8 +331,8 @@
     <footer class="py-12 border-t border-white/5 bg-black/20">
         <div class="max-w-[1200px] mx-auto px-6 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-2 opacity-50">
-                <img src="Assets/Images/Brototype-without-tagline-white-LOGO-SVG.svg" alt="Brototype"
-                    class="h-8 w-auto" loading="lazy">
+                <img src="Assets/Images/Brototype-without-tagline-white-LOGO-SVG.svg" alt="Brototype" class="h-8 w-auto"
+                    loading="lazy">
             </div>
             <p class="text-xs text-gray-500 uppercase tracking-widest">© 2026 Brototype All rights reserved.</p>
             <div class="flex gap-6 text-xs text-gray-500 uppercase tracking-widest font-bold">
@@ -351,28 +343,51 @@
     </footer>
 
     <script>
-        // Populate UTM fields from URL if present
-        (function () {
-            const params = [
-                'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref',
-                'utm_id', 'utm_adgroup', 'utm_matchtype', 'utm_audience', 'utm_adgroupid',
-                'utm_network', 'utm_placement', 'utm_device', 'utm_location', 'utm_campaignid'
-            ];
-            const urlParams = new URLSearchParams(window.location.search);
-            params.forEach(param => {
-                if (urlParams.has(param)) {
-                    const fields = document.getElementsByName(param);
-                    for (let field of fields) {
-                        field.value = urlParams.get(param);
+            // Populate UTM fields from URL if present
+            (function () {
+                const params = [
+                    'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref',
+                    'utm_id', 'utm_adgroup', 'utm_matchtype', 'utm_audience', 'utm_adgroupid',
+                    'utm_network', 'utm_placement', 'utm_device', 'utm_location', 'utm_campaignid'
+                ];
+                const urlParams = new URLSearchParams(window.location.search);
+                params.forEach(param => {
+                    if (urlParams.has(param)) {
+                        const fields = document.getElementsByName(param);
+                        for (let field of fields) {
+                            field.value = urlParams.get(param);
+                        }
                     }
-                }
-            });
+                });
+            })();
+
+        // Initialize intl-tel-input with guaranteed execution
+        let iti;
+        const initializeITI = () => {
+            const input = document.querySelector("#visiblePhone");
+            if (input && window.intlTelInput && !iti) {
+                iti = window.intlTelInput(input, {
+                    initialCountry: "in",
+                    separateDialCode: true,
+                    preferredCountries: ["in", "ae", "qa", "sa", "gb", "us"],
+                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+                });
+            }
+        };
+        
+        // Force initialization attempt repeatedly until success or 5s timeout
+        (function() {
+            let attempts = 0;
+            const interval = setInterval(() => {
+                initializeITI();
+                if (iti || attempts > 50) clearInterval(interval);
+                attempts++;
+            }, 100);
         })();
 
-        // Allow only digits in phone field
-        document.getElementById('visiblePhone').addEventListener('input', function () {
-            this.value = this.value.replace(/\D/g, '').slice(0, 10);
-        });
+        // Also hook to standard events
+        window.onload = initializeITI;
+        document.addEventListener("DOMContentLoaded", initializeITI);
 
         function clearError(fieldId, errId) {
             document.getElementById(fieldId).classList.remove('field-error');
@@ -383,109 +398,84 @@
             document.getElementById(errId).classList.add('visible');
         }
 
+        // Replace with your actual Google Apps Script Web App URL
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpbbIsr_TsmdTSf1S9L5G1VA2vtL0zN6smzvyogPeBmqrwijOZ0Tcekw2vMBIdwd93/exec";
+
         async function handleSubmit(event) {
             event.preventDefault();
 
             const form = event.target;
             let isValid = true;
 
-            // First Name
-            const firstName = document.getElementById('fieldFirstName').value.trim();
-            clearError('fieldFirstName', 'errFirstName');
-            if (!firstName) { showError('fieldFirstName', 'errFirstName'); isValid = false; }
+            // Name
+            const name = document.getElementById('fieldName').value.trim();
+            clearError('fieldName', 'errName');
+            if (!name) { showError('fieldName', 'errName'); isValid = false; }
 
-            // Last Name
-            const lastName = document.getElementById('fieldLastName').value.trim();
-            clearError('fieldLastName', 'errLastName');
-            if (!lastName) { showError('fieldLastName', 'errLastName'); isValid = false; }
-
-            // Email
-            const email = document.getElementById('fieldEmail').value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            clearError('fieldEmail', 'errEmail');
-            if (!email || !emailRegex.test(email)) { showError('fieldEmail', 'errEmail'); isValid = false; }
-
-            // Phone (digits only, exactly 10 digits)
-            const phone = document.getElementById('visiblePhone').value.trim();
+            // Phone validation using iti (v17 stable)
             const phoneEl = document.getElementById('visiblePhone');
             phoneEl.classList.remove('field-error');
             document.getElementById('errPhone').classList.remove('visible');
-            if (!phone || !/^\d{10}$/.test(phone)) {
+            
+            if (!iti || (iti.isValidNumber && !iti.isValidNumber())) {
                 phoneEl.classList.add('field-error');
                 document.getElementById('errPhone').classList.add('visible');
                 isValid = false;
             }
 
-            // Employment Status
+            // Current Status
             const dropdown = document.getElementById('fieldDropdown').value;
             clearError('fieldDropdown', 'errDropdown');
             if (!dropdown) { showError('fieldDropdown', 'errDropdown'); isValid = false; }
 
             if (!isValid) return;
 
-            // Set hidden Zoho phone field
-            document.getElementById('realPhoneNumber').value = phone;
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitIcon = document.getElementById('submitIcon');
 
-            const formData = new FormData(form);
-
-            // Prepare SuperLeap payload
-            const payload = {
-                "form_id": "Free-Career-Guidance-Static-Landing-Page",
-                "form_name": "Free Career Guidance Static Landing Page",
-                "lead_details": {
-                    "first_name": firstName,
-                    "last_name": lastName,
-                    "email": email,
-                    "phone_number": "+91 " + phone,
-                    "employment_status": dropdown,
-                },
-                "marketing_details": {
-                    "utm_source": formData.get('utm_source'),
-                    "utm_medium": formData.get('utm_medium'),
-                    "utm_campaign": formData.get('utm_campaign'),
-                    "utm_term": formData.get('utm_term'),
-                    "utm_content": formData.get('utm_content'),
-                    "utm_network": formData.get('utm_network'),
-                    "utm_device": formData.get('utm_device'),
-                    "utm_location": formData.get('utm_location'),
-                    "utm_campaignid": formData.get('utm_campaignid'),
-                    "utm_adgroupid": formData.get('utm_adgroupid'),
-                    "utm_audience": formData.get('utm_audience'),
-                    "utm_placement": formData.get('utm_placement'),
-                    "utm_matchtype": formData.get('utm_matchtype'),
-                    "utm_adgroup": formData.get('utm_adgroup'),
-                    "ref": formData.get('ref')
-                },
-                "timestamp": new Date().toISOString()
-            };
-
-            // Send to SuperLeap
-            try {
-                fetch('https://v1hooks.superleap.com/3jZLLY/3jZLLY_H2sjFRx8xYIOrXhKIaoN', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                    mode: 'no-cors'
-                });
-            } catch (error) {
-                console.error('SuperLeap submission error:', error);
+            // Set loading state
+            submitBtn.disabled = true;
+            submitText.innerText = 'Submitting...';
+            if (submitIcon) {
+                submitIcon.innerText = 'hourglass_empty';
+                submitIcon.classList.add('animate-spin');
             }
 
-            // Track and submit to Zoho via hidden iframe
-            fbq('track', 'Lead');
-            form.submit();
+            // Use URLSearchParams for best compatibility with Google Apps Script e.parameter
+            const params = new URLSearchParams();
+            const formData = new FormData(form);
+            for (const [key, value] of formData.entries()) {
+                params.append(key, value);
+            }
 
+            // Get cleaned phone number from iti
+            if (iti) {
+                params.set('Phone', iti.getNumber());
+            }
+
+            // Fire and forget fetch to avoid Google Apps Script delay
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: params,
+                mode: 'no-cors'
+            }).catch(error => console.error("Error submitting form:", error));
+
+            // Small delay for UI feedback, then instantly show success
             setTimeout(function () {
+                form.reset();
+                // Reset loading state
+                submitBtn.disabled = false;
+                submitText.innerText = 'Get My Guidance';
+                if (submitIcon) {
+                    submitIcon.innerText = 'arrow_forward';
+                    submitIcon.classList.remove('animate-spin');
+                }
+
+                // Show success modal
                 document.getElementById('thankYouModal').classList.remove('hidden');
                 document.getElementById('thankYouModal').classList.add('flex');
-                form.reset();
-            }, 500);
-        }
-
-        function splitPhone() {
-            const visiblePhone = document.getElementById('visiblePhone').value;
-            const realPhoneNumber = document.getElementById('realPhoneNumber');
-            realPhoneNumber.value = visiblePhone;
+            }, 600);
         }
     </script>
 </body>
