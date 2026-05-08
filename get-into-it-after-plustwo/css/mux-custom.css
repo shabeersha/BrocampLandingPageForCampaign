@@ -1,0 +1,69 @@
+/* Mux Player Customization - Force Teal Play Button with White Icon */
+
+mux-player {
+    /* Mux Theme Variables - Global Overrides */
+    --primary-color: #0d9488 !important;
+    /* Main Accent (Teal) */
+    --secondary-color: #ffffff !important;
+    /* Contrast Text/Icon (White) */
+
+    /* Media Chrome Variables */
+    --media-icon-color: #ffffff !important;
+    --media-button-icon-color: #ffffff !important;
+
+    /* Seek bar color */
+    --seek-live-button-background: #0d9488 !important;
+    --seek-backward-button-background: #0d9488 !important;
+    --seek-forward-button-background: #0d9488 !important;
+    --play-button-background: #0d9488 !important;
+}
+
+/* 
+ * Shadow Part Overrides 
+ * Target the Center Play Button Wrapper
+ */
+mux-player::part(center-play-button) {
+    /* Geometry */
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+
+    /* Colors */
+    background-color: #0d9488 !important;
+    /* Solid Teal */
+    border: none !important;
+
+    /* Remove any default effects */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4) !important;
+
+    /* Icon Colors inside this part */
+    color: #ffffff !important;
+    --media-icon-color: #ffffff !important;
+    --media-button-icon-color: #ffffff !important;
+}
+
+mux-player::part(center-play-button):hover {
+    background-color: #0f766e !important;
+    transform: scale(1.1) !important;
+}
+
+/* Target the Icon specifically */
+mux-player::part(play-icon) {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    /* Just in case */
+}
+
+/* Hide Specific Controls */
+mux-player::part(volume-range),
+mux-player::part(time-display),
+mux-player::part(fullscreen-button),
+mux-player::part(playback-rate-button),
+mux-player::part(airplay-button),
+mux-player::part(cast-button),
+mux-player::part(rendition-select) {
+    display: none !important;
+}
