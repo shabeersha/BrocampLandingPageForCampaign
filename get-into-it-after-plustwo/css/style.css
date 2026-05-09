@@ -12,7 +12,7 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #1e293b;
-            background: #f8fafc;
+            background: #ffffff;
             line-height: 1.6;
             width: 100%;
             overflow-x: hidden;
@@ -29,7 +29,7 @@
             --accent: #f43f5e;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --bg-light: #f8fafc;
+            --bg-light: #ffffff;
             --glass-bg: rgba(255, 255, 255, 0.7);
             --glass-border: rgba(255, 255, 255, 0.5);
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -37,7 +37,7 @@
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
             --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
             --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-            
+
             /* Fluid Spacing & Typography */
             --section-padding: 60px;
             --h1-size: 2.5rem;
@@ -63,7 +63,8 @@
         section {
             padding: var(--section-padding) 0;
             will-change: transform;
-            transform: translateZ(0); /* Force GPU in Safari */
+            transform: translateZ(0);
+            /* Force GPU in Safari */
             backface-visibility: hidden;
         }
 
@@ -137,16 +138,19 @@
             }
 
             .nav-cta {
-                padding: 8px 16px;
-                /* Decreased padding */
-                font-size: 0.85rem;
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .nav-cta svg {
+                display: none;
             }
         }
 
         /* Hero */
         .hero {
             padding: calc(var(--section-padding) + 60px) 0 var(--section-padding);
-            background: #f8fafc;
+            background: #ffffff;
             position: relative;
             overflow: hidden;
         }
@@ -373,15 +377,17 @@
             white-space: normal;
             overscroll-behavior: contain;
             /* Width is handled by JS but we need to ensure it's visible */
-            z-index: 2100 !important; 
-            border: 1px solid rgba(0,0,0,0.1);
+            z-index: 2100 !important;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 600px) {
             .iti__country-list {
-                max-width: 85vw !important; /* Prevent overflowing screen */
-                width: 100% !important; /* Attempt to match input width if container allows, or constrained by max-width */
+                max-width: 85vw !important;
+                /* Prevent overflowing screen */
+                width: 100% !important;
+                /* Attempt to match input width if container allows, or constrained by max-width */
             }
         }
 
@@ -540,83 +546,7 @@
             font-weight: 500;
         }
 
-        @media (max-width: 900px) {
-            .hero {
-                padding: 64px 0 24px;
-                /* Maximum compaction */
-            }
 
-            .hero .container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 6px;
-                /* Micro gap */
-                text-align: center;
-            }
-
-            /* Unwrap content containers to allow interleaving */
-            .hero-content,
-            .hero-glass-card {
-                display: contents;
-            }
-
-            .hero-badge {
-                display: none;
-            }
-
-            .hero h1 {
-                order: 2;
-                font-size: 1.35rem;
-                /* Very compact title */
-                line-height: 1.15;
-                width: 100%;
-                margin-bottom: 0;
-            }
-
-            .hero-video {
-                order: 3;
-                width: 100%;
-                margin: 0 0 6px;
-            }
-
-            .hero-bullets {
-                order: 4;
-                /* Bullets before CTA */
-                text-align: left;
-                margin-bottom: 4px;
-                font-size: 1rem;
-                padding-left: 0;
-                line-height: 1.4;
-            }
-
-            .hero-bullets li {
-                padding: 1px 0 1px 20px;
-            }
-
-            .hero-bullets li::before {
-                font-size: 0.9em;
-                top: 2px;
-            }
-
-            .hero-cta-group {
-                order: 5;
-                /* CTA last */
-                width: 100%;
-            }
-
-            .hero .btn-primary {
-                padding: 10px 20px;
-                min-width: auto;
-                width: 100%;
-                font-size: 0.95rem;
-            }
-
-            .micro-copy {
-                margin-top: 4px;
-                font-size: 0.7rem;
-            }
-        }
 
         /* Sections */
         section {
@@ -936,7 +866,7 @@
 
         /* Benefits */
         .benefits {
-            background: #F9FAFB;
+            background: #ffffff;
         }
 
         .benefits-grid {
@@ -1117,7 +1047,7 @@
 
         /* Who & About */
         .who-about {
-            background: #F9FAFB;
+            background: #ffffff;
         }
 
         .who-grid {
@@ -1241,7 +1171,7 @@
 
         /* FAQ */
         .faq {
-            background: #F9FAFB;
+            background: #ffffff;
         }
 
         .accordion {
@@ -1304,8 +1234,10 @@
         }
 
         .final-cta .glass-card {
-            background: rgba(255, 255, 255, 0.85); /* More opaque for Safari */
-            backdrop-filter: blur(10px); /* Reduced blur */
+            background: rgba(255, 255, 255, 0.85);
+            /* More opaque for Safari */
+            backdrop-filter: blur(10px);
+            /* Reduced blur */
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(13, 148, 136, 0.2);
             border-radius: 32px;
@@ -1333,6 +1265,36 @@
 
         .final-cta .section-subtitle {
             margin-bottom: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .final-cta {
+                padding: 40px 0 !important;
+            }
+            .final-cta .glass-card {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 20px !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            .final-cta .section-title {
+                font-size: 1.8rem !important;
+                margin-bottom: 16px !important;
+                line-height: 1.2 !important;
+            }
+            .final-cta .section-subtitle {
+                font-size: 1rem !important;
+                margin-bottom: 32px !important;
+                line-height: 1.5 !important;
+                color: #475569 !important;
+            }
+            .final-cta .btn-primary {
+                width: 100% !important;
+                padding: 18px 24px !important;
+                font-size: 1.15rem !important;
+            }
         }
 
         .final-cta .btn-primary {
@@ -3196,10 +3158,113 @@
             animation: whatsappPulse 2s infinite;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background-color: #1ebc59;
+        /* FLOATING LAYERED HERO - Creative Overlapping Design */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 60px 0 30px !important;
+                background: #ffffff !important;
+                overflow: visible !important;
+                /* Allow overlap */
+            }
+
+            .hero-badge {
+                display: none !important;
+            }
+
+            .hero::before {
+                display: none !important;
+                /* Remove previous overlay */
+            }
+
+            .hero .container {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0 !important;
+                /* Controlled by margins */
+                padding: 0 16px !important;
+                align-items: center !important;
+            }
+
+            /* The Image Container - Now at the Top */
+            .hero-video {
+                display: block !important;
+                order: 1 !important;
+                width: 95% !important;
+                max-width: 320px !important;
+                height: auto !important;
+                margin: 0 auto 0 !important;
+                border-radius: 24px !important;
+                overflow: hidden !important;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+                z-index: 1 !important;
+                transform: translateY(10px);
+                /* Slight nudge */
+            }
+
+            .hero-video .video-container {
+                padding-bottom: 0 !important;
+                height: auto !important;
+            }
+
+            .hero-video img {
+                width: 100% !important;
+                height: auto !important;
+                display: block !important;
+                object-fit: contain !important;
+            }
+
+            /* The Content Card - Overlapping the Image */
+            .hero-content {
+                order: 2 !important;
+                width: 100% !important;
+                margin-top: -40px !important;
+                /* THE OVERLAP */
+                z-index: 2 !important;
+                position: relative !important;
+            }
+
+            .hero-glass-card {
+                background: rgba(255, 255, 255, 0.9) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                padding: 24px 20px !important;
+                border-radius: 24px !important;
+                border: 1px solid rgba(255, 255, 255, 0.8) !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+                text-align: center !important;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 8px !important;
+                color: #0f172a !important;
+                font-weight: 800 !important;
+            }
+
+            .hero-subheading {
+                font-size: 0.95rem !important;
+                margin-bottom: 16px !important;
+                color: #475569 !important;
+            }
+
+            .hero-bullets {
+                display: none !important;
+            }
+
+            .hero-cta-group {
+                width: 100% !important;
+            }
+
+            .hero .btn-primary {
+                padding: 16px 32px !important;
+                width: 100% !important;
+                font-size: 1.15rem !important;
+                font-weight: 700 !important;
+            }
         }
+
+
 
         .whatsapp-icon-svg {
             width: 70%;
@@ -3231,9 +3296,38 @@
 
         /* Optimization for Safari / iOS Performance */
         @supports (-webkit-overflow-scrolling: touch) {
-            .glass-card, .testimonial, .navbar.scrolled, .benefit-card {
+
+            .glass-card,
+            .testimonial,
+            .navbar.scrolled,
+            .benefit-card {
                 backdrop-filter: blur(5px) !important;
                 -webkit-backdrop-filter: blur(5px) !important;
                 background: rgba(255, 255, 255, 0.95) !important;
+            }
+        }
+
+        /* Mobile Single Page Feel Optimization */
+        @media (max-width: 768px) {
+            section {
+                padding: 40px 0 !important;
+                background: #ffffff !important;
+            }
+
+            .benefit-card,
+            .stat,
+            .step-card,
+            .testimonial,
+            .pricing-card,
+            .video-card {
+                box-shadow: none !important;
+            }
+
+            .section-title {
+                margin-bottom: 8px !important;
+            }
+
+            .section-subtitle {
+                margin-bottom: 24px !important;
             }
         }
