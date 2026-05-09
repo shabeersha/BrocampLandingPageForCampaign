@@ -1,0 +1,5 @@
+cloudflare-worker.js
+.DS_Store
+node_modules/
+dist/
+.env

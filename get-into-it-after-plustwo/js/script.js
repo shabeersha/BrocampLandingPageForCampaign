@@ -417,111 +417,27 @@ registrationForm.addEventListener('submit', (e) => {
         registrationFormContent.style.display = 'none';
         successMessage.style.display = 'block';
 
-        // 1. Submit to Google Sheets (Background)
-        const googleSheetURL = 'https://script.google.com/macros/s/AKfycbyw4w1SkeQRAj4h10Ep2txu4vuiglQVM3ny-U6XxJpoWy_JgFaIpb996yOBjXboHFLIOQ/exec';
-        const googleSheetRequest = fetch(googleSheetURL, { method: 'POST', body: formData, mode: 'no-cors' })
-            .catch(error => console.error('Google Sheet Error:', error));
+        // THE CLOUDFLARE WORKER URL
+        const WORKER_URL = 'https://ig-ml.quiet-dew-3468.workers.dev/';
 
-        // 2. Submit to Main Server API (Background)
-        const mainServerURL = 'https://support-api.brototype.com/api/users/student';
-        // const mainServerURL = 'http://localhost:3000/submit';
-
-
-        // Prepare JSON data
-        // Name Splitting Logic: If space, split; else lastName is "Nil"
-        const fullName = (data['full-name'] || '').trim();
-        let firstName = fullName;
-        let lastName = 'Nil';
-
-        if (fullName.includes(' ')) {
-            const parts = fullName.split(' ');
-            firstName = parts[0];
-            lastName = parts.slice(1).join(' '); // Joins the rest as last name
-        }
-
-        const jsonData = {
-            ...data,
-            firstName: firstName,
-            lastName: lastName,
-            duration: Number(data['duration']) // Ensure number type
-        };
-
-        fetch(mainServerURL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(jsonData),
+        fetch(WORKER_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
         })
-          .then((response) => {
-            if (response.ok) {
-              gtag_report_conversion();
-            } else {
-              console.error("Server error");
-            }
-          })
-          .catch((error) => {
-            console.error("Main Server API Error:", error);
-          });
-
-        // Mixpanel Tracking - Form Submission
-        mixpanel.track("Form Submitted " + getRef(), {
-            page_url: window.location.href,
-            page_path: window.location.pathname,
-            ref: getRef(),
-            traffic_source: getTrafficSource()
+        .then(response => response.json())
+        .then(result => {
+            console.log('Submission Success:', result);
+        })
+        .catch(error => {
+            console.error('Submission Error:', error);
         });
-
-        // Meta Pixel Tracking - Form Submission
-        const pageName = window.location.pathname.includes('2026-new-year')
-            ? '6DaysChallenge-2026NewYearOffer'
-            : '6DaysChallenge-Graduates';
-
-        // if (typeof fbq === 'function') {
-        //     fbq('track', 'Lead');
-        // }
-
-        if (data.utm_source == "admeta malayalam") {
-            console.log("Admeta Malayalam");
-            fbq('track', 'Lead');
-
-        } else if (data.utm_source == "google ads malayalam") {
-            console.log("Google Ads Malayalam");
-            gtag('event', 'conversion', {
-                'send_to': 'AW-10890430926/v4VLCNyz2_obEM6T-8go'
-            });
-
-        }
     }
-
 });
 
-// Meta Pixel Tracking - CTA Clicks (Custom Granular Events)
-document.addEventListener('DOMContentLoaded', () => {
-    // Determine page context for the event name
-    const pageContext = window.location.pathname.includes('2026-new-year')
-        ? '6DaysChallenge-2026NewYearOffer'
-        : '6DaysChallenge-Graduates';
-
-    // Select all elements with data-cta-location attribute
-    const ctaButtons = document.querySelectorAll('[data-cta-location]');
-
-    ctaButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const location = btn.getAttribute('data-cta-location');
-            if (location && typeof fbq === 'function') {
-                // Construct Custom Event Name
-                // Format: PageName-Location-CTA-Clicked
-                // Example: 6DaysChallenge-2026NewYearOffer-Hero-CTA-Clicked
-                const eventName = `${pageContext}-${location}-CTA-Clicked`;
-
-                fbq('track', eventName);
-            }
-        });
-    });
-});
-
-// UTM Parameter Population
+// UTM Parameter Population (Keeping this as it only reads URL and fills hidden fields)
 document.addEventListener('DOMContentLoaded', () => {
     try {
         const urlParams = new URLSearchParams(window.location.search);
